@@ -1,9 +1,8 @@
-#include <iostream>
-#include <windows.h>
-using namespace std;
+#include "Board.h"
+#include "Common.h"
 
 int main() {
-	cout << "hello Kha";
+	Board::DrawBoard(4);
 	Sleep(10000);
 	return 0;
 }
