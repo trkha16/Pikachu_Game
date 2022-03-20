@@ -1,11 +1,19 @@
-#include "Board.h"
+﻿#include "Board.h"
 #include "Common.h"
 
+Board::Board(int size) {
+	_size = size;
+	_A = new Point * [_size + 1];
+	for (int i = 1; i <= _size; i++) {
+		_A[i] = new Point[_size + 1];
+	}
+}
+
 void Board::DrawBoard(int size) {
-	int COLUMN = 8 * size + 1;
-	int ROW = 4 * size + 1;
-	int cellRow = 5;
-	int cellCol = 9;
+	int COLUMN = 8 * size + 1; // ĐỘ DÀI BẢNG
+	int ROW = 4 * size + 1; // ĐỘ CAO BẢNG
+	int cellRow = 5; // ĐỘ CAO 1 Ô
+	int cellCol = 9; // ĐỘ DÀI 1 Ô
 
 	// Tao bien tren cua bang
 	Common::gotoXY(1, 1);
@@ -59,7 +67,7 @@ void Board::DrawBoard(int size) {
 		}
 	}
 
-	//
+	// VE BANG THEO CHIEU NGANG
 
 	for (int j = 2; j < COLUMN; j++) {
 		int i = 5;
@@ -76,6 +84,8 @@ void Board::DrawBoard(int size) {
 		Sleep(10);
 	}
 
+	// VE BANG THEO CHIEU DOC
+
 	for (int j = 2; j < ROW; j++) {
 		int i = 9;
 		while (i < COLUMN) {
@@ -88,9 +98,31 @@ void Board::DrawBoard(int size) {
 			}
 			i += 8;
 		}
-		Sleep(10);
+		Sleep(20);
 	}
 
-	Common::gotoXY(5, 3);
-	cout << "X";
+	// Test
+	int y = 3;
+	while(y<=ROW) {
+		int x = 5;
+		while (x <= COLUMN) {
+			Common::gotoXY(x, y);
+			cout << "A";
+			x += cellCol - 1;
+		}
+		y += cellRow - 1;
+	}
+}
+
+void Board::cellSelect(int x,int y, char symbol) {
+
+	/*for (int i = y - 1; i <= y + 1; i++) {
+		for (int j = x - 3; j <= x + 3; j++) {
+			Common::gotoXY(j, i);
+			putchar(219);
+		}
+	}*/
+	Common::gotoXY(x, y);
+	Common::setConsoleColor(2);
+	cout << symbol;
 }

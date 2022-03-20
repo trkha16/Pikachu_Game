@@ -2,7 +2,12 @@
 #include "Common.h"
 
 int main() {
-	Board::DrawBoard(4);
+	Common::setUpConsole();
+	Board::DrawBoard(6);
+	Common::gotoXY(0, 20);
+	while (true) {
+		cout << Common::getConsoleInput() << endl;
+	}
 	Sleep(10000);
 	return 0;
 }
