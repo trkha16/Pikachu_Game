@@ -4,7 +4,6 @@
 
 int main() {
 	Common::setUpConsole();
-	//Board::Board(4);
 	Game g;
 	g.startGame();
 	return 0;

@@ -136,7 +136,7 @@ void Board::drawBoard() {
 
 void Board::cellSelect(int x, int y, char symbol) {
 	Common::gotoXY(x, y);
-	Common::setConsoleColor(2,5);
+	Common::setConsoleColor(WHITE, BLACK);
 	cout << symbol;
 	Common::gotoXY(x, y);
 }

@@ -1,12 +1,13 @@
 ﻿#pragma once
 #include "Board.h"
+#include "Common.h"
 
 class Game {
 private:
 	int _x, _y; // Tọa độ x y của console 
 	bool _isLoop; // true/ false: game chạy/ dừng
-	bool _isWin;
-	bool _isLose;
+	bool _isWin; // Kiểm tra thắng
+	bool _isLose; // Kiểm tra thua
 	Board* _b;
 public:
 	Game();

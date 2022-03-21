@@ -2,7 +2,6 @@
 #include <iostream>
 #include <Windows.h>
 #include "Common.h"
-#include "Point.h"
 using namespace std;
 
 class Board{
