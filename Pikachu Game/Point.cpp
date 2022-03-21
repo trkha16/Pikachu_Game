@@ -1,11 +1,16 @@
 #include "Point.h"
 
+Point::Point(int x, int y) {
+	_x = x;
+	_y = y;
+}
+
 void Point::setX(int x) {
-	x = x;
+	_x = x;
 }
 
 void Point::setY(int y) {
-	y = y;
+	_y = y;
 }
 
 int Point::getX() {

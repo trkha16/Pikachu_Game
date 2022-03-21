@@ -25,8 +25,8 @@ void Common::setConsoleTitle()
     SetConsoleTitle(L"PIKACHU GAME");
 }
 
-void Common::setConsoleColor(int color) {
-    SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), color);
+void Common::setConsoleColor(int background, int color) {
+    SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), background * 16 + color);
 }
 
 int Common::getConsoleInput() {
