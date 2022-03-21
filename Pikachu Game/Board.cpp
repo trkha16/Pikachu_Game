@@ -1,5 +1,4 @@
 ﻿#include "Board.h"
-#include "Common.h"
 
 Board::Board(int size) {
 	_size = size; // Khởi tạo size
@@ -20,23 +19,20 @@ Board::~Board()
 	delete[] _A;
 }
 
-
-
 void Board::randomCharacter() {
 	for (int i = 1; i <= _size; i++) {
 		for (int j = 1; j <= _size; j++) {
-			_A[i][j] = 'A';
+			_A[i][j] = rand() % 26 + 65;
 		}
 	}
 }
 
 void Board::printCharacter() {
 	// Phần tử đầu tiên bắt đầu tại vị trí x = 5, y = 3
-	int startX = 5, startY = 3;
 	for (int i = 1; i <= _size; i++) {
 		for (int j = 1; j <= _size; j++) {
-			int x = startX + (j - 1) * (_cellCol - 1); // Công thức tính vị trí x của phần tử
-			int y = startY + (i - 1) * (_cellRow - 1); // Công thức tính vị trí y của phần từ
+			int x = getXInConsole(j);
+			int y = getYInConsole(i);
 			Common::gotoXY(x, y); // chuyển con trỏ console tới vị trí x y
 			cout << _A[i][j]; // in character ra console 
 		}
@@ -134,11 +130,30 @@ void Board::drawBoard() {
 	}
 }
 
-void Board::cellSelect(int x, int y, char symbol) {
-	Common::gotoXY(x, y);
+void Board::cellSelect(int x, int y) {
 	Common::setConsoleColor(WHITE, BLACK);
-	cout << symbol;
+	for (int i = y - 1; i <= y + 1; i++) {
+		for (int j = x - 3; j <= x + 3; j++) {
+			Common::gotoXY(j, i);
+			putchar(32);
+		}
+	}
 	Common::gotoXY(x, y);
+	cout << getCharacterByXY(x, y);
+	Common::gotoXY(x, y);
+}
+
+void Board::deleteCellSelect(int x, int y) {
+	Common::setConsoleColor(BLACK, WHITE);
+	for (int i = y - 1; i <= y + 1; i++) {
+		for (int j = x - 3; j <= x + 3; j++) {
+			Common::gotoXY(j, i);
+			putchar(32);
+		}
+	}
+	Common::gotoXY(x, y);
+	Common::setConsoleColor(BLACK, WHITE);
+	cout << getCharacterByXY(x, y);
 }
 
 int Board::getCellCol() {
@@ -151,4 +166,18 @@ int Board::getCellRow() {
 
 int Board::getSize() {
 	return _size;
+}
+
+int Board::getXInConsole(int j) {
+	return 5 + (j - 1) * (_cellCol - 1);
+}
+
+int Board::getYInConsole(int i) {
+	return 3 + (i - 1) * (_cellRow - 1);
+}
+
+char Board::getCharacterByXY(int x, int y) {
+	int i = ((y - 3) / (_cellRow - 1)) + 1;
+	int j = ((x - 5) / (_cellCol - 1)) + 1;
+	return _A[i][j];
 }

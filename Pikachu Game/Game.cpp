@@ -18,7 +18,7 @@ void Game::startGame() {
 	_b->printCharacter();
 	Common::gotoXY(5, 3);
 	while (_isLoop) {
-		_b->cellSelect(_x, _y, 'A');
+		_b->cellSelect(_x, _y);
 		switch (Common::getConsoleInput())
 		{
 		case 1:
@@ -46,9 +46,8 @@ void Game::startGame() {
 }
 
 void Game::moveUp() {
-	Common::gotoXY(_x, _y);
-	Common::setConsoleColor(BLACK, WHITE);
-	cout << 'A';
+	_b->deleteCellSelect(_x, _y);
+
 	int posY = _y - _b->getCellRow() + 1;
 	if (posY >= 3) {
 		_y = posY;
@@ -57,9 +56,8 @@ void Game::moveUp() {
 }
 
 void Game::moveDown() {
-	Common::gotoXY(_x, _y);
-	Common::setConsoleColor(BLACK, WHITE);
-	cout << 'A';
+	_b->deleteCellSelect(_x, _y);
+
 	int posY = _y + _b->getCellRow() - 1;
 	if (posY <= 3 + (_b->getSize() - 1) * (_b->getCellRow() - 1)) {
 		_y = posY;
@@ -68,9 +66,8 @@ void Game::moveDown() {
 }
 
 void Game::moveLeft() {
-	Common::gotoXY(_x, _y);
-	Common::setConsoleColor(BLACK, WHITE);
-	cout << 'A';
+	_b->deleteCellSelect(_x, _y);
+
 	int posX = _x - _b->getCellCol() + 1;
 	if (posX >= 5) {
 		_x = posX;
@@ -79,9 +76,8 @@ void Game::moveLeft() {
 }
 
 void Game::moveRight() {
-	Common::gotoXY(_x, _y);
-	Common::setConsoleColor(BLACK, WHITE);
-	cout << 'A';
+	_b->deleteCellSelect(_x, _y);
+
 	int posX = _x + _b->getCellCol() - 1;
 	if (posX <= 5 + (_b->getSize() - 1) * (_b->getCellCol() - 1)) {
 		_x = posX;

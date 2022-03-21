@@ -15,10 +15,14 @@ public:
 	~Board(); // Destructor 
 
 	void drawBoard(); // Vẽ bảng game
-	void cellSelect(int, int, char); // Chọn ô nào sẽ hiển thị màu ở ô đó
+	void cellSelect(int, int); // Chọn ô nào sẽ hiển thị màu ở ô đó
+	void deleteCellSelect(int, int); // Chọn ô khác sẽ bỏ hiển thị màu ở ô này
 	void randomCharacter(); // Random character
 	void printCharacter(); // In mảng character đã random ra console 
 	int getCellRow(); // Lấy độ cao 1 ô
 	int getCellCol(); // lấy độ dài 1 ô
 	int getSize(); // lấy giá trị size
+	char getCharacterByXY(int, int); // Lấy ký tự tại ô có vị trí x y trên console 
+	int getXInConsole(int); // Lấy vị trí X trên console của character 
+	int getYInConsole(int); // Lấy vị trí Y trên console của character
 };

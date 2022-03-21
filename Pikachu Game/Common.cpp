@@ -10,7 +10,7 @@ void Common::setUpConsole()
 	disableMaximize();
 	setConsoleTitle();
 	hideScrollBars();
-	showCursor(true);
+	showCursor(false);
 	disableMouseInput();
 }
 
