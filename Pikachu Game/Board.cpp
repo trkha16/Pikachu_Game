@@ -185,3 +185,16 @@ char Board::getCharacterByXY(int x, int y) {
 char Board::getCharacterByIJ(int i, int j) {
 	return _A[i][j];
 }
+
+void Board::cellLockColor(int x, int y) {
+	for (int i = y - 1; i <= y + 1; i++) {
+		for (int j = x - 3; j <= x + 3; j++) {
+			Common::gotoXY(j, i);
+			Common::setConsoleColor(BLUE, WHITE);
+			putchar(32);
+		}
+	}
+	Common::gotoXY(x, y);
+	cout << getCharacterByXY(x, y);
+	Common::gotoXY(x, y);
+}
