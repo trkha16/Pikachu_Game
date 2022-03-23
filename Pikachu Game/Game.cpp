@@ -39,80 +39,97 @@ void Game::startGame() {
 			moveDown();
 			break;
 		case 6:
-		{
-			pair<int, int> a;
-			pair<int, int> b; 
-
-			_cntEnter++;
-			if (_cntEnter == 1) {
-				a = make_pair(_x,_y);
-				_b->cellLockColor(_x, _y);
-			}
-			else {
-				b = make_pair(_x, _y);
-				_b->cellLockColor(_x, _y);
-				_cntEnter = 0;
-			}
+			solveMatching();
 			break;
-		}
 		default:
 			break;
 		}
 	}
 }
 
+void Game::setX(int x) {
+	_x = x;
+}
+
+void Game::setY(int y) {
+	_y = y;
+}
+
+int Game::getX() {
+	return _x;
+}
+
+int Game::getY() {
+	return _y;
+}
+
 void Game::moveUp() {
 	int posY = _y - _b->getCellRow() + 1;
 	if (posY >= 3) {
-		_b->deleteCellSelect(_x, _y);
+		if (!_b->isCharacterLocked(_b->getIByYConsole(_y), _b->getJByXConsole(_x))) {
+			_b->deleteCellSelect(_x, _y);
+		}
 		_y = posY;
 		Common::gotoXY(_x, _y);
-		_b->cellSelect(_x, _y);
+		if (!_b->isCharacterLocked(_b->getIByYConsole(_y), _b->getJByXConsole(_x))) {
+			_b->cellSelect(_x, _y);
+		}
 	}
 }
 
 void Game::moveDown() {
 	int posY = _y + _b->getCellRow() - 1;
 	if (posY <= 3 + (_b->getSize() - 1) * (_b->getCellRow() - 1)) {
-		_b->deleteCellSelect(_x, _y);
+		if (!_b->isCharacterLocked(_b->getIByYConsole(_y), _b->getJByXConsole(_x))) {
+			_b->deleteCellSelect(_x, _y);
+		}
 		_y = posY;
 		Common::gotoXY(_x, _y);
-		_b->cellSelect(_x, _y);
+		if (!_b->isCharacterLocked(_b->getIByYConsole(_y), _b->getJByXConsole(_x))) {
+			_b->cellSelect(_x, _y);
+		}
 	}
 }
 
 void Game::moveLeft() {
 	int posX = _x - _b->getCellCol() + 1;
 	if (posX >= 5) {
-		_b->deleteCellSelect(_x, _y);
+		if (!_b->isCharacterLocked(_b->getIByYConsole(_y), _b->getJByXConsole(_x))) {
+			_b->deleteCellSelect(_x, _y);
+		}
 		_x = posX;
 		Common::gotoXY(_x, _y);
-		_b->cellSelect(_x, _y);
+		if (!_b->isCharacterLocked(_b->getIByYConsole(_y), _b->getJByXConsole(_x))) {
+			_b->cellSelect(_x, _y);
+		}
 	}
 }
 
 void Game::moveRight() {
 	int posX = _x + _b->getCellCol() - 1;
 	if (posX <= 5 + (_b->getSize() - 1) * (_b->getCellCol() - 1)) {
-		_b->deleteCellSelect(_x, _y);
+		if (!_b->isCharacterLocked(_b->getIByYConsole(_y), _b->getJByXConsole(_x))) {
+			_b->deleteCellSelect(_x, _y);
+		}
 		_x = posX;
 		Common::gotoXY(_x, _y);
-		_b->cellSelect(_x, _y);
+		if (!_b->isCharacterLocked(_b->getIByYConsole(_y), _b->getJByXConsole(_x))) {
+			_b->cellSelect(_x, _y);
+		}
 	}
 }
 
 bool Game::checkIMatching(pair<int, int> firstBlock, pair<int, int> secondBlock) {
 	int iA = firstBlock.first;
 	int jA = firstBlock.second;
-	int iB = firstBlock.first;
-	int jB = firstBlock.second;
-	char firstChar = _b->getCharacterByIJ(iA, jA);
-	char secondChar = _b->getCharacterByIJ(iB, jB);
+	int iB = secondBlock.first;
+	int jB = secondBlock.second;
 
 	if ((iA != iB) && (jA != jB)) {
 		return false;
 	}
-	if (firstChar != secondChar) {
+	
+	if (checkCharacterMatching(firstBlock, secondBlock) == false) {
 		return false;
 	}
 
@@ -147,6 +164,18 @@ bool Game::checkIMatching(pair<int, int> firstBlock, pair<int, int> secondBlock)
 	}
 }
 
+bool Game::checkZMatching(pair<int, int> firstBlock, pair<int, int> secondBlock) {
+	return false;
+}
+
+bool Game::checkLMatching(pair<int, int> firstBlock, pair<int, int> secondBlock) {
+	return false;
+}
+
+bool Game::checkUMatching(pair<int, int> firstBlock, pair<int, int> secondBlock) {
+	return false;
+}
+
 bool Game::checkCharacterMatching(pair<int, int> firstBlock, pair<int, int> secondBlock) {
 	int xa = firstBlock.first;
 	int ya = firstBlock.second;
@@ -155,5 +184,26 @@ bool Game::checkCharacterMatching(pair<int, int> firstBlock, pair<int, int> seco
 	char firstChar = _b->getCharacterByIJ(xa, ya);
 	char secondChar = _b->getCharacterByIJ(xb, yb);
 
-	return firstChar == secondChar;
+	if (firstChar == secondChar) {
+		return true;
+	}
+	return false;
+}
+
+bool Game::checkMatching(pair<int, int> firstBlock, pair<int, int> secondBlock) {
+	return false;
+}
+
+void Game::solveMatching() {
+	_cntEnter++;
+	if (_cntEnter == 1) {
+		_b->setCharacterLocked(_b->getIByYConsole(_y), _b->getJByXConsole(_x));
+		firstBlock = make_pair(_b->getIByYConsole(_y), _b->getJByXConsole(_x));
+		_b->cellLockColor(_x, _y);
+	}
+	else {
+		_b->setCharacterLocked(_b->getIByYConsole(_y), _b->getJByXConsole(_x));
+		secondBlock = make_pair(_b->getIByYConsole(_y), _b->getJByXConsole(_x));
+		_cntEnter = 0;
+	}
 }

@@ -8,6 +8,7 @@ class Board {
 private:
 	int _size; // Size của bảng game, size x size
 	char** _A; // Mảng 2 chiều lưu các characters
+	bool** _LOCK; // Kiểm tra xem phần tử ở mảng A đã lock hay chưa
 	int _cellRow; // ĐỘ CAO 1 Ô
 	int _cellCol; // ĐỘ DÀI 1 Ô
 public:
@@ -26,5 +27,9 @@ public:
 	char getCharacterByIJ(int, int); // lấy ký tự tại ô có vị trí i j trên bảng
 	int getXInConsole(int); // Lấy vị trí X trên console của character 
 	int getYInConsole(int); // Lấy vị trí Y trên console của character
+	int getIByYConsole(int); // Lấy index i trên bảng từ vị trí Y trên console 
+	int getJByXConsole(int); // Lấy index i trên bảng từ vị trí X trên console 
 	void cellLockColor(int, int); // Khi nhấn enter ô đó
+	bool isCharacterLocked(int, int); // Kiểm tra xem ô này đã bị lock hay chưa
+	void setCharacterLocked(int, int); // Gán giá trị cho _Lock[i][j]
 };

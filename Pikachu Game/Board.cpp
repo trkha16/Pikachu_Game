@@ -6,8 +6,16 @@ Board::Board(int size) {
 	_cellCol = 9;
 	// Khởi tạo mảng characters
 	_A = new char* [_size + 1];
+	_LOCK = new bool* [_size + 1];
 	for (int i = 1; i <= _size; i++) {
 		_A[i] = new char[_size + 1];
+		_LOCK[i] = new bool[_size + 1];
+	}
+
+	for (int i = 1; i <= _size; i++) {
+		for (int j = 1; j <= _size; j++) {
+			_LOCK[i][j] = false;
+		}
 	}
 }
 
@@ -176,9 +184,17 @@ int Board::getYInConsole(int i) {
 	return 3 + (i - 1) * (_cellRow - 1);
 }
 
+int Board::getIByYConsole(int y) {
+	return (((y - 3) / (_cellRow - 1)) + 1);
+}
+
+int Board::getJByXConsole(int x) {
+	return (((x - 5) / (_cellCol - 1)) + 1);
+}
+
 char Board::getCharacterByXY(int x, int y) {
-	int i = ((y - 3) / (_cellRow - 1)) + 1;
-	int j = ((x - 5) / (_cellCol - 1)) + 1;
+	int i = getIByYConsole(y);
+	int j = getJByXConsole(x);
 	return _A[i][j];
 }
 
@@ -197,4 +213,12 @@ void Board::cellLockColor(int x, int y) {
 	Common::gotoXY(x, y);
 	cout << getCharacterByXY(x, y);
 	Common::gotoXY(x, y);
+}
+
+bool Board::isCharacterLocked(int i, int j) {
+	return _LOCK[i][j];
+}
+
+void Board::setCharacterLocked(int i, int j) {
+	_LOCK[i][j] = 1 - _LOCK[i][j];
 }
