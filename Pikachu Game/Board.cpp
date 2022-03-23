@@ -121,7 +121,7 @@ void Board::drawBoard() {
 			if ((j - 1) % (_cellRow - 1) == 0) {
 				putchar(206);
 			}
-			else{
+			else {
 				putchar(186);
 			}
 			i += 8;
@@ -179,5 +179,9 @@ int Board::getYInConsole(int i) {
 char Board::getCharacterByXY(int x, int y) {
 	int i = ((y - 3) / (_cellRow - 1)) + 1;
 	int j = ((x - 5) / (_cellCol - 1)) + 1;
+	return _A[i][j];
+}
+
+char Board::getCharacterByIJ(int i, int j) {
 	return _A[i][j];
 }

@@ -4,7 +4,7 @@
 #include "Common.h"
 using namespace std;
 
-class Board{
+class Board {
 private:
 	int _size; // Size của bảng game, size x size
 	char** _A; // Mảng 2 chiều lưu các characters
@@ -23,6 +23,7 @@ public:
 	int getCellCol(); // lấy độ dài 1 ô
 	int getSize(); // lấy giá trị size
 	char getCharacterByXY(int, int); // Lấy ký tự tại ô có vị trí x y trên console 
+	char getCharacterByIJ(int, int); // lấy ký tự tại ô có vị trí i j trên bảng
 	int getXInConsole(int); // Lấy vị trí X trên console của character 
 	int getYInConsole(int); // Lấy vị trí Y trên console của character
 };
