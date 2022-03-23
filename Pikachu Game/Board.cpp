@@ -22,7 +22,7 @@ Board::Board(int size) {
 
 Board::~Board()
 {
-	for (int i = 1; i <= _size; i++) {
+	for (int i = 0; i <= _size + 1; i++) {
 		delete[] _A[i];
 	}
 	delete[] _A;

@@ -137,13 +137,15 @@ bool Game::checkIMatching(pair<int, int> firstBlock, pair<int, int> secondBlock)
 		if (iA > iB) {
 			swap(iA, iB);
 		}
-		for (int i = iA + 1; i <= iB; i++) {
-			if (i == iB) {
-				return true;
-			}
+		for (int i = iA + 1; i < iB; i++) {
 			if (_b->getCharacterByIJ(i, jA) != '0') {
 				return false;
 			}
+		}
+		if ((_b->getCharacterByIJ(iA, jA) == '0')
+			|| (_b->getCharacterByIJ(iB, jB) == '0')
+			|| checkCharacterMatching(firstBlock, secondBlock) == true) {
+			return true;
 		}
 	}
 
@@ -152,15 +154,18 @@ bool Game::checkIMatching(pair<int, int> firstBlock, pair<int, int> secondBlock)
 		if (jA > jB) {
 			swap(jA, jB);
 		}
-		for (int i = jA + 1; i <= jB; i++) {
-			if (i == jB) {
-				return true;
-			}
+		for (int i = jA + 1; i < jB; i++) {
 			if (_b->getCharacterByIJ(iA, i) != '0') {
 				return false;
 			}
 		}
+		if ((_b->getCharacterByIJ(iA, jA) == '0')
+			|| (_b->getCharacterByIJ(iB, jB) == '0')
+			|| checkCharacterMatching(firstBlock, secondBlock) == true) {
+			return true;
+		}
 	}
+	return false;
 }
 
 bool Game::checkZMatching(pair<int, int> firstBlock, pair<int, int> secondBlock) {
@@ -211,11 +216,6 @@ bool Game::checkZMatching(pair<int, int> firstBlock, pair<int, int> secondBlock)
 
 bool Game::checkUMatching(pair<int, int> firstBlock, pair<int, int> secondBlock) {
 	// Duyệt theo chiều ngang dọc ngang
-	// điểm 1 nằm bên trên, điểm 2 nằm bên dưới
-	if (firstBlock.first > secondBlock.first) {
-		swap(firstBlock, secondBlock);
-	}
-
 	int iA = firstBlock.first;
 	int jA = firstBlock.second;
 	int iB = secondBlock.first;
@@ -232,11 +232,6 @@ bool Game::checkUMatching(pair<int, int> firstBlock, pair<int, int> secondBlock)
 	}
 
 	// Duyệt theo chiều dọc ngang dọc
-	// điểm 1 nằm bên trái, điểm 2 nằm bên phải
-	if (firstBlock.second > secondBlock.second) {
-		swap(firstBlock, secondBlock);
-	}
-
 	iA = firstBlock.first;
 	jA = firstBlock.second;
 	iB = secondBlock.first;
@@ -302,10 +297,6 @@ void Game::solveMatching() {
 		if (checkMatching(firstBlock, secondBlock) == true) {
 			_b->setCharacterByIJ(iA, jA); // xóa ô 1 trong bảng
 			_b->setCharacterByIJ(iB, jB); // xóa ô 2 trong mảng
-
-			// TEST
-			Common::gotoXY(50, 0);
-			cout << checkMatching(firstBlock, secondBlock);
 			
 			// Tô lại màu cho ô 1
 			Common::gotoXY(_b->getXInConsole(jA), _b->getYInConsole(iA));
