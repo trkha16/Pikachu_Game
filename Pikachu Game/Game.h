@@ -34,7 +34,6 @@ public:
 
 	bool checkIMatching(pair<int, int>, pair<int, int>);
 	bool checkZMatching(pair<int, int>, pair<int, int>);
-	bool checkLMatching(pair<int, int>, pair<int, int>);
 	bool checkUMatching(pair<int, int>, pair<int, int>);
 	bool checkCharacterMatching(pair<int, int>, pair<int, int>); // Kiểm tra giá trị 2 char có bằng nhau
 	bool checkMatching(pair<int, int>, pair<int, int>); // Kiểm tra 2 ô đó có match với nhau

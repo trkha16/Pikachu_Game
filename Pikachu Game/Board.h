@@ -16,8 +16,7 @@ public:
 	~Board(); // Destructor 
 
 	void drawBoard(); // Vẽ bảng game
-	void cellSelect(int, int); // Lướt đến ô nào sẽ hiển thị màu ở ô đó
-	void deleteCellSelect(int, int); // Lướt đến ô khác sẽ bỏ hiển thị màu ở ô này
+	void cellColor(int, int, int, int); // Hiển thị màu ở ô với background + màu chữ
 	void randomCharacter(); // Random character
 	void printCharacter(); // In mảng character đã random ra console 
 	int getCellRow(); // Lấy độ cao 1 ô
@@ -25,11 +24,11 @@ public:
 	int getSize(); // lấy giá trị size
 	char getCharacterByXY(int, int); // Lấy ký tự tại ô có vị trí x y trên console 
 	char getCharacterByIJ(int, int); // lấy ký tự tại ô có vị trí i j trên bảng
+	void setCharacterByIJ(int, int); // Thay đổi ký tự ô có vị trí i j thành '0' ( đã xóa)
 	int getXInConsole(int); // Lấy vị trí X trên console của character 
 	int getYInConsole(int); // Lấy vị trí Y trên console của character
 	int getIByYConsole(int); // Lấy index i trên bảng từ vị trí Y trên console 
 	int getJByXConsole(int); // Lấy index i trên bảng từ vị trí X trên console 
-	void cellLockColor(int, int); // Khi nhấn enter ô đó
 	bool isCharacterLocked(int, int); // Kiểm tra xem ô này đã bị lock hay chưa
 	void setCharacterLocked(int, int); // Gán giá trị cho _Lock[i][j]
 };

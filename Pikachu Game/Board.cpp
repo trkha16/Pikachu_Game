@@ -5,15 +5,16 @@ Board::Board(int size) {
 	_cellRow = 5;
 	_cellCol = 9;
 	// Khởi tạo mảng characters
-	_A = new char* [_size + 1];
-	_LOCK = new bool* [_size + 1];
-	for (int i = 1; i <= _size; i++) {
-		_A[i] = new char[_size + 1];
-		_LOCK[i] = new bool[_size + 1];
+	_A = new char* [_size + 2];
+	_LOCK = new bool* [_size + 2];
+	for (int i = 0; i <= _size + 1; i++) {
+		_A[i] = new char[_size + 2];
+		_LOCK[i] = new bool[_size + 2];
 	}
 
-	for (int i = 1; i <= _size; i++) {
-		for (int j = 1; j <= _size; j++) {
+	for (int i = 0; i <= _size + 1; i++) {
+		for (int j = 0; j <= _size + 1; j++) {
+			_A[i][j] = '0';
 			_LOCK[i][j] = false;
 		}
 	}
@@ -138,8 +139,8 @@ void Board::drawBoard() {
 	}
 }
 
-void Board::cellSelect(int x, int y) {
-	Common::setConsoleColor(WHITE, BLACK);
+void Board::cellColor(int x, int y, int background, int fontColor) {
+	Common::setConsoleColor(background, fontColor);
 	for (int i = y - 1; i <= y + 1; i++) {
 		for (int j = x - 3; j <= x + 3; j++) {
 			Common::gotoXY(j, i);
@@ -149,19 +150,6 @@ void Board::cellSelect(int x, int y) {
 	Common::gotoXY(x, y);
 	cout << getCharacterByXY(x, y);
 	Common::gotoXY(x, y);
-}
-
-void Board::deleteCellSelect(int x, int y) {
-	Common::setConsoleColor(BLACK, WHITE);
-	for (int i = y - 1; i <= y + 1; i++) {
-		for (int j = x - 3; j <= x + 3; j++) {
-			Common::gotoXY(j, i);
-			putchar(32);
-		}
-	}
-	Common::gotoXY(x, y);
-	Common::setConsoleColor(BLACK, WHITE);
-	cout << getCharacterByXY(x, y);
 }
 
 int Board::getCellCol() {
@@ -202,17 +190,8 @@ char Board::getCharacterByIJ(int i, int j) {
 	return _A[i][j];
 }
 
-void Board::cellLockColor(int x, int y) {
-	for (int i = y - 1; i <= y + 1; i++) {
-		for (int j = x - 3; j <= x + 3; j++) {
-			Common::gotoXY(j, i);
-			Common::setConsoleColor(BLUE, WHITE);
-			putchar(32);
-		}
-	}
-	Common::gotoXY(x, y);
-	cout << getCharacterByXY(x, y);
-	Common::gotoXY(x, y);
+void Board::setCharacterByIJ(int i, int j) {
+	_A[i][j] = '0';
 }
 
 bool Board::isCharacterLocked(int i, int j) {
