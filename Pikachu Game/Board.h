@@ -2,6 +2,7 @@
 #include <iostream>
 #include <Windows.h>
 #include "Common.h"
+#include <vector>
 using namespace std;
 
 class Board {

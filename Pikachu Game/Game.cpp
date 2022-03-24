@@ -279,6 +279,11 @@ bool Game::checkMatching(pair<int, int> firstBlock, pair<int, int> secondBlock) 
 }
 
 void Game::solveMatching() {
+	// Ô bị lock rồi thì return luôn
+	if (_b->isCharacterLocked(_b->getIByYConsole(_y), _b->getJByXConsole(_x)) == true) {
+		return;
+	}
+
 	_cntEnter++;
 	if (_cntEnter == 1) {
 		_b->setCharacterLocked(_b->getIByYConsole(_y), _b->getJByXConsole(_x)); // Lock ô thứ 1

@@ -29,10 +29,42 @@ Board::~Board()
 }
 
 void Board::randomCharacter() {
-	for (int i = 1; i <= _size; i++) {
+	/*for (int i = 1; i <= _size; i++) {
 		for (int j = 1; j <= _size; j++) {
 			_A[i][j] = rand() % 26 + 65;
 		}
+	}*/
+	
+	// Tạo mảng character 
+	vector<char> Alphabet;
+	vector<bool> lockAlphabet; // Kiểm tra đã đưa vị trí này vào bảng game hay chưa
+	int i = 65;
+	int cnt = 2;
+	while (cnt <= _size * _size) {
+		Alphabet.push_back(char(i));
+		Alphabet.push_back(char(i));
+		lockAlphabet.push_back(false);
+		lockAlphabet.push_back(false);
+		i++;
+		if (i > 65+11) i = 65;
+		cnt += 2;
+	}
+
+	// Thực hiện random vị trí
+	for (int i = 1; i <= _size; i++) {
+		for (int j = 1; j <= _size; j++) {
+			int randomPos = rand() % Alphabet.size();
+			while (lockAlphabet[randomPos] == true) {
+				randomPos = rand() % Alphabet.size();
+			}
+			lockAlphabet[randomPos] = true;
+			_A[i][j] = Alphabet[randomPos];
+		}
+	}
+
+	Common::gotoXY(50, 0);
+	for (int i = 0; i < Alphabet.size(); i++) {
+		cout << Alphabet[i];
 	}
 }
 
