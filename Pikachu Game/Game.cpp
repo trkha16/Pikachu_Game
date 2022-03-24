@@ -66,26 +66,45 @@ int Game::getY() {
 void Game::moveUp() {
 	int posY = _y - _b->getCellRow() + 1;
 	if (posY >= 3) {
-		if (!_b->isCharacterLocked(_b->getIByYConsole(_y), _b->getJByXConsole(_x))) {
+		if (_b->isCharacterLocked(_b->getIByYConsole(_y), _b->getJByXConsole(_x)) == true) {
+			_b->cellColor(_x, _y, BLUE, WHITE);
+		}
+		else if (_b->getCharacterByIJ(_b->getIByYConsole(_y), _b->getJByXConsole(_x)) == '0') {
+			_b->cellColor(_x, _y, BLACK, BLACK);
+		}
+		else {
 			_b->cellColor(_x, _y, BLACK, WHITE);
 		}
 		_y = posY;
 		Common::gotoXY(_x, _y);
-		if (!_b->isCharacterLocked(_b->getIByYConsole(_y), _b->getJByXConsole(_x))) {
+		if (_b->getCharacterByIJ(_b->getIByYConsole(_y), _b->getJByXConsole(_x)) == '0') {
+			_b->cellColor(_x, _y, WHITE, WHITE);
+		}
+		else {
 			_b->cellColor(_x, _y, WHITE, BLACK);
 		}
+		
 	}
 }
 
 void Game::moveDown() {
 	int posY = _y + _b->getCellRow() - 1;
 	if (posY <= 3 + (_b->getSize() - 1) * (_b->getCellRow() - 1)) {
-		if (!_b->isCharacterLocked(_b->getIByYConsole(_y), _b->getJByXConsole(_x))) {
+		if (_b->isCharacterLocked(_b->getIByYConsole(_y), _b->getJByXConsole(_x)) == true) {
+			_b->cellColor(_x, _y, BLUE, WHITE);
+		}
+		else if (_b->getCharacterByIJ(_b->getIByYConsole(_y), _b->getJByXConsole(_x)) == '0') {
+			_b->cellColor(_x, _y, BLACK, BLACK);
+		}
+		else {
 			_b->cellColor(_x, _y, BLACK, WHITE);
 		}
 		_y = posY;
 		Common::gotoXY(_x, _y);
-		if (!_b->isCharacterLocked(_b->getIByYConsole(_y), _b->getJByXConsole(_x))) {
+		if (_b->getCharacterByIJ(_b->getIByYConsole(_y), _b->getJByXConsole(_x)) == '0') {
+			_b->cellColor(_x, _y, WHITE, WHITE);
+		}
+		else {
 			_b->cellColor(_x, _y, WHITE, BLACK);
 		}
 	}
@@ -94,12 +113,21 @@ void Game::moveDown() {
 void Game::moveLeft() {
 	int posX = _x - _b->getCellCol() + 1;
 	if (posX >= 5) {
-		if (!_b->isCharacterLocked(_b->getIByYConsole(_y), _b->getJByXConsole(_x))) {
+		if (_b->isCharacterLocked(_b->getIByYConsole(_y), _b->getJByXConsole(_x)) == true) {
+			_b->cellColor(_x, _y, BLUE, WHITE);
+		}
+		else if (_b->getCharacterByIJ(_b->getIByYConsole(_y), _b->getJByXConsole(_x)) == '0') {
+			_b->cellColor(_x, _y, BLACK, BLACK);
+		}
+		else {
 			_b->cellColor(_x, _y, BLACK, WHITE);
 		}
 		_x = posX;
 		Common::gotoXY(_x, _y);
-		if (!_b->isCharacterLocked(_b->getIByYConsole(_y), _b->getJByXConsole(_x))) {
+		if (_b->getCharacterByIJ(_b->getIByYConsole(_y), _b->getJByXConsole(_x)) == '0') {
+			_b->cellColor(_x, _y, WHITE, WHITE);
+		}
+		else {
 			_b->cellColor(_x, _y, WHITE, BLACK);
 		}
 	}
@@ -108,12 +136,21 @@ void Game::moveLeft() {
 void Game::moveRight() {
 	int posX = _x + _b->getCellCol() - 1;
 	if (posX <= 5 + (_b->getSize() - 1) * (_b->getCellCol() - 1)) {
-		if (!_b->isCharacterLocked(_b->getIByYConsole(_y), _b->getJByXConsole(_x))) {
+		if (_b->isCharacterLocked(_b->getIByYConsole(_y), _b->getJByXConsole(_x)) == true) {
+			_b->cellColor(_x, _y, BLUE, WHITE);
+		}
+		else if (_b->getCharacterByIJ(_b->getIByYConsole(_y), _b->getJByXConsole(_x)) == '0') {
+			_b->cellColor(_x, _y, BLACK, BLACK);
+		}
+		else {
 			_b->cellColor(_x, _y, BLACK, WHITE);
 		}
 		_x = posX;
 		Common::gotoXY(_x, _y);
-		if (!_b->isCharacterLocked(_b->getIByYConsole(_y), _b->getJByXConsole(_x))) {
+		if (_b->getCharacterByIJ(_b->getIByYConsole(_y), _b->getJByXConsole(_x)) == '0') {
+			_b->cellColor(_x, _y, WHITE, WHITE);
+		}
+		else {
 			_b->cellColor(_x, _y, WHITE, BLACK);
 		}
 	}
@@ -279,8 +316,10 @@ bool Game::checkMatching(pair<int, int> firstBlock, pair<int, int> secondBlock) 
 }
 
 void Game::solveMatching() {
-	// Ô bị lock rồi thì return luôn
-	if (_b->isCharacterLocked(_b->getIByYConsole(_y), _b->getJByXConsole(_x)) == true) {
+	// Ô đã xóa hoặc lock rồi thì không enter được nữa
+	if ((_b->getCharacterByIJ(_b->getIByYConsole(_y), _b->getJByXConsole(_x)) == '0')
+		|| _b->isCharacterLocked(_b->getIByYConsole(_y), _b->getJByXConsole(_x)) == true)
+	{
 		return;
 	}
 
@@ -293,7 +332,6 @@ void Game::solveMatching() {
 	else {
 		int iA = firstBlock.first; // i của ô 1
 		int jA = firstBlock.second; // j của ô 1
-		_b->setCharacterLocked(_b->getIByYConsole(_y), _b->getJByXConsole(_x)); // Lock ô thứ 2
 		secondBlock = make_pair(_b->getIByYConsole(_y), _b->getJByXConsole(_x)); // Lưu index ô thứ 2
 		int iB = secondBlock.first; // i của ô 2
 		int jB = secondBlock.second; // j của ô 2
@@ -303,26 +341,49 @@ void Game::solveMatching() {
 			_b->setCharacterByIJ(iA, jA); // xóa ô 1 trong bảng
 			_b->setCharacterByIJ(iB, jB); // xóa ô 2 trong mảng
 			
+			// Màu xanh lá báo 2 ô match thành công
+			// Tô lại màu cho ô 1
+			Common::gotoXY(_b->getXInConsole(jA), _b->getYInConsole(iA));
+			_b->cellColor(_b->getXInConsole(jA), _b->getYInConsole(iA), GREEN, GREEN);
+
+			// Tô lại màu cho ô 2
+			Common::gotoXY(_b->getXInConsole(jB), _b->getYInConsole(iB));
+			_b->cellColor(_b->getXInConsole(jB), _b->getYInConsole(iB), GREEN, GREEN);
+
+			Sleep(200);
+
 			// Tô lại màu cho ô 1
 			Common::gotoXY(_b->getXInConsole(jA), _b->getYInConsole(iA));
 			_b->cellColor(_b->getXInConsole(jA), _b->getYInConsole(iA), BLACK, BLACK);
 
 			// Tô lại màu cho ô 2
 			Common::gotoXY(_b->getXInConsole(jB), _b->getYInConsole(iB));
-			_b->cellColor(_b->getXInConsole(jB), _b->getYInConsole(iB), BLACK, BLACK);
+			_b->cellColor(_b->getXInConsole(jB), _b->getYInConsole(iB), WHITE, WHITE);
 		}
 		else { // Nếu 2 ô không match với nhau
-			_b->setCharacterLocked(firstBlock.first, firstBlock.second); // Bỏ lock ô 1
-			_b->setCharacterLocked(secondBlock.first, secondBlock.second); // Bỏ lock ô 2
+			// Màu đỏ báo 2 ô không match được
+			// Tô lại màu cho ô 1
+			Common::gotoXY(_b->getXInConsole(jA), _b->getYInConsole(iA));
+			_b->cellColor(_b->getXInConsole(jA), _b->getYInConsole(iA), RED, WHITE);
 
+			// Tô lại màu cho ô 2
+			Common::gotoXY(_b->getXInConsole(jB), _b->getYInConsole(iB));
+			_b->cellColor(_b->getXInConsole(jB), _b->getYInConsole(iB), RED, WHITE);
+
+			Sleep(200);
+
+			// reset lại màu
 			// Tô lại màu cho ô 1
 			Common::gotoXY(_b->getXInConsole(jA), _b->getYInConsole(iA));
 			_b->cellColor(_b->getXInConsole(jA), _b->getYInConsole(iA), BLACK, WHITE);
 
 			// Tô lại màu cho ô 2
 			Common::gotoXY(_b->getXInConsole(jB), _b->getYInConsole(iB));
-			_b->cellColor(_b->getXInConsole(jB), _b->getYInConsole(iB), BLACK, WHITE);
+			_b->cellColor(_b->getXInConsole(jB), _b->getYInConsole(iB), WHITE, BLACK);
 		}
+
+		// Bỏ lock ô 1
+		_b->setCharacterLocked(iA, jA);
 
 		// reset biến count
 		_cntEnter = 0;

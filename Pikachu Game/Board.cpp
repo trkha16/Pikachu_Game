@@ -29,12 +29,6 @@ Board::~Board()
 }
 
 void Board::randomCharacter() {
-	/*for (int i = 1; i <= _size; i++) {
-		for (int j = 1; j <= _size; j++) {
-			_A[i][j] = rand() % 26 + 65;
-		}
-	}*/
-	
 	// Tạo mảng character 
 	vector<char> Alphabet;
 	vector<bool> lockAlphabet; // Kiểm tra đã đưa vị trí này vào bảng game hay chưa
@@ -60,11 +54,6 @@ void Board::randomCharacter() {
 			lockAlphabet[randomPos] = true;
 			_A[i][j] = Alphabet[randomPos];
 		}
-	}
-
-	Common::gotoXY(50, 0);
-	for (int i = 0; i < Alphabet.size(); i++) {
-		cout << Alphabet[i];
 	}
 }
 
