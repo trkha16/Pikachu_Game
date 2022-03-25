@@ -4,6 +4,9 @@ Game::Game() {
 	_x = 5; //  vị trí bắt đầu x = 5
 	_y = 3; // vi trí bắt đầu y = 3
 	_cntEnter = 0;
+	_cntCellMatch = 0;
+	_isPairValidExisted = true;
+	_isEndGame = false;
 	_isLoop = true; // Game đang chạy
 	_b = new Board(6); // Tạo bảng game size = 6
 }
@@ -20,6 +23,22 @@ void Game::startGame() {
 	Common::gotoXY(5, 3);
 	_b->cellColor(_x, _y, WHITE, BLACK);
 	while (_isLoop) {
+		_isEndGame = (_cntCellMatch == _b->getSize() * _b->getSize())
+			|| (_isPairValidExisted == false);
+		if (_isEndGame == true) {
+			_isLoop = false;
+			Common::setConsoleColor(WHITE, BLACK);
+			if (_cntCellMatch == _b->getSize() * _b->getSize()) {
+				Common::gotoXY(50, 0);
+				cout << "Win";
+			}
+			else {
+				Common::gotoXY(50, 0);
+				cout << "Lose";
+			}
+			break;
+		}
+
 		switch (Common::getConsoleInput())
 		{
 		case 1:
@@ -295,7 +314,7 @@ bool Game::checkCharacterMatching(pair<int, int> firstBlock, pair<int, int> seco
 	char firstChar = _b->getCharacterByIJ(xa, ya); // Giá trị block 1
 	char secondChar = _b->getCharacterByIJ(xb, yb); // Giá trị block 2
 
-	if (firstChar == secondChar) {
+	if ((firstChar == secondChar) && (firstChar != '0') && (secondChar != '0')) {
 		return true;
 	}
 	return false;
@@ -338,9 +357,12 @@ void Game::solveMatching() {
 
 		// ô 1 và ô 2 match với nhau
 		if (checkMatching(firstBlock, secondBlock) == true) {
+			_cntCellMatch += 2; //  Đã xóa được thêm 2 ô
 			_b->setCharacterByIJ(iA, jA); // xóa ô 1 trong bảng
 			_b->setCharacterByIJ(iB, jB); // xóa ô 2 trong mảng
 			
+			_isPairValidExisted = checkPairValidExisted(); // Kiểm tra xem còn cặp hợp lệ ko
+
 			// Màu xanh lá báo 2 ô match thành công
 			// Tô lại màu cho ô 1
 			Common::gotoXY(_b->getXInConsole(jA), _b->getYInConsole(iA));
@@ -388,4 +410,22 @@ void Game::solveMatching() {
 		// reset biến count
 		_cntEnter = 0;
 	}
+}
+
+bool Game::checkPairValidExisted() {
+	for (int iA = 1; iA <= _b->getSize(); iA++) {
+		for (int jA = 1; jA <= _b->getSize(); jA++) {
+			pair<int, int> firstBlock(iA, jA);
+			for (int iB = 1; iB <= _b->getSize(); iB++) {
+				for (int jB = 1; jB <= _b->getSize(); jB++) {
+					pair<int, int> secondBlock(iB, jB);
+					if (checkMatching(firstBlock, secondBlock) == true) {
+						return true;
+					}
+				}
+			}
+		}
+	}
+
+	return false;
 }

@@ -9,6 +9,9 @@ struct Game {
 	pair<int, int> firstBlock; // Lock ô thứ nhất
 	pair<int, int> secondBlock; // Lock ô thứ hai
 	bool _isLoop; // true/ false: game chạy/ dừng
+	bool _isEndGame; // Kiểm tra game kết thúc hay chưa
+	bool _isPairValidExisted; // Kiểm tra còn cặp nào thỏa mãn hay không
+	int _cntCellMatch; // Đếm xem đã xóa bao nhiêu character 
 	int _cntEnter; // Biến enter
 	Board* _b; // Tạo bảng game
 
@@ -35,4 +38,5 @@ struct Game {
 	bool checkCharacterMatching(pair<int, int>, pair<int, int>); // Kiểm tra giá trị 2 char có bằng nhau
 	bool checkMatching(pair<int, int>, pair<int, int>); // Kiểm tra 2 ô đó có match với nhau
 	void solveMatching(); // Xử lý matching
+	bool checkPairValidExisted(); // Kiểm tra xem còn cặp nào có thể matching được với nhau không 
 };
