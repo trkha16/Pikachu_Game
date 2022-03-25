@@ -5,14 +5,13 @@
 #include <vector>
 using namespace std;
 
-class Board {
-private:
+struct Board {
 	int _size; // Size của bảng game, size x size
 	char** _A; // Mảng 2 chiều lưu các characters
 	bool** _LOCK; // Kiểm tra xem phần tử ở mảng A đã lock hay chưa
 	int _cellRow; // ĐỘ CAO 1 Ô
 	int _cellCol; // ĐỘ DÀI 1 Ô
-public:
+
 	Board(int); // Constructor khởi tạo Board
 	~Board(); // Destructor 
 

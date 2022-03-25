@@ -4,17 +4,14 @@
 #include <algorithm>
 using namespace std;
 
-class Game {
-private:
+struct Game {
 	int _x, _y; // Tọa độ x y của console
 	pair<int, int> firstBlock; // Lock ô thứ nhất
 	pair<int, int> secondBlock; // Lock ô thứ hai
 	bool _isLoop; // true/ false: game chạy/ dừng
-	bool _isWin; // Kiểm tra thắng
-	bool _isLose; // Kiểm tra thua
 	int _cntEnter; // Biến enter
 	Board* _b; // Tạo bảng game
-public:
+
 	Game();
 	~Game();
 
