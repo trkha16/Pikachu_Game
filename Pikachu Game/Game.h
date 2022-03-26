@@ -19,6 +19,7 @@ struct Game {
 	~Game();
 
 	void startGame(); // Bắt đầu game
+	bool endGame(); // kiểm tra kết thúc game
 
 	void moveUp(); // di chuyển lên trên
 	void moveDown(); // di chuyển xuống

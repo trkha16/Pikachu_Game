@@ -4,7 +4,7 @@ Game::Game() {
 	_x = 5; //  vị trí bắt đầu x = 5
 	_y = 3; // vi trí bắt đầu y = 3
 	_cntEnter = 0;
-	_cntCellMatch = 0;
+	_cntCellMatch = 0; // chưa xóa character nào
 	_isPairValidExisted = true;
 	_isEndGame = false;
 	_isLoop = true; // Game đang chạy
@@ -17,25 +17,16 @@ Game::~Game() {
 }
 
 void Game::startGame() {
-	_b->drawBoard();
-	_b->randomCharacter();
-	_b->printCharacter();
+	_b->drawBoard(); // vẽ bảng
+	_b->randomCharacter(); // random mảng
+	_b->printCharacter(); // in character trong mảng ra console 
+	
+	// Focus vào phần tử đầu
 	Common::gotoXY(5, 3);
 	_b->cellColor(_x, _y, WHITE, BLACK);
+
 	while (_isLoop) {
-		_isEndGame = (_cntCellMatch == _b->getSize() * _b->getSize())
-			|| (_isPairValidExisted == false);
-		if (_isEndGame == true) {
-			_isLoop = false;
-			Common::setConsoleColor(WHITE, BLACK);
-			if (_cntCellMatch == _b->getSize() * _b->getSize()) {
-				Common::gotoXY(50, 0);
-				cout << "Win";
-			}
-			else {
-				Common::gotoXY(50, 0);
-				cout << "Lose";
-			}
+		if (endGame() == true) {
 			break;
 		}
 
@@ -428,4 +419,23 @@ bool Game::checkPairValidExisted() {
 	}
 
 	return false;
+}
+
+bool Game::endGame() {
+	_isEndGame = (_cntCellMatch == _b->getSize() * _b->getSize())
+		|| (_isPairValidExisted == false);
+	if (_isEndGame == true) {
+		_isLoop = false;
+		Common::setConsoleColor(WHITE, BLACK);
+		if (_cntCellMatch == _b->getSize() * _b->getSize()) {
+			Common::gotoXY(50, 27);
+			cout << "Win";
+		}
+		else {
+			Common::gotoXY(50, 27);
+			cout << "Lose";
+		}
+	}
+
+	return _isEndGame;
 }
