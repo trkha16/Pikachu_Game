@@ -8,6 +8,7 @@ Game::Game() {
 	_isPairValidExisted = true;
 	_isEndGame = false;
 	_isLoop = true; // Game đang chạy
+	_help = false;
 	_b = new Board(6); // Tạo bảng game size = 6
 }
 
@@ -32,7 +33,7 @@ void Game::startGame() {
 
 		switch (Common::getConsoleInput())
 		{
-		case 1:
+		case 1: // ESC
 			Common::clearConsole();
 			Common::setConsoleColor(WHITE, BLACK);
 			return;
@@ -48,8 +49,13 @@ void Game::startGame() {
 		case 5:
 			moveDown();
 			break;
-		case 6:
+		case 6: // Enter
 			solveMatching();
+			break;
+		case 7: // Need help
+			_help = true;
+			checkPairValidExisted();
+			_help = false;
 			break;
 		default:
 			break;
@@ -411,6 +417,49 @@ bool Game::checkPairValidExisted() {
 				for (int jB = 1; jB <= _b->getSize(); jB++) {
 					pair<int, int> secondBlock(iB, jB);
 					if (checkMatching(firstBlock, secondBlock) == true) {
+						if (_help == true) {
+							int x = _x;
+							int y = _y;
+
+							// Tô lại màu cho ô 1
+							Common::gotoXY(_b->getXInConsole(jA), _b->getYInConsole(iA));
+							_b->cellColor(_b->getXInConsole(jA), _b->getYInConsole(iA), PURPLE, WHITE);
+
+							// Tô lại màu cho ô 2
+							Common::gotoXY(_b->getXInConsole(jB), _b->getYInConsole(iB));
+							_b->cellColor(_b->getXInConsole(jB), _b->getYInConsole(iB), PURPLE, WHITE);
+
+							Sleep(200);
+
+							// Tô lại màu cho ô 1
+							if (_b->isCharacterLocked(iA, jA) == true) {
+								Common::gotoXY(_b->getXInConsole(jA), _b->getYInConsole(iA));
+								_b->cellColor(_b->getXInConsole(jA), _b->getYInConsole(iA), BLUE, WHITE);
+							}
+							else {
+								Common::gotoXY(_b->getXInConsole(jA), _b->getYInConsole(iA));
+								_b->cellColor(_b->getXInConsole(jA), _b->getYInConsole(iA), BLACK, WHITE);
+							}
+
+							// Tô lại màu cho ô 2
+							if (_b->isCharacterLocked(iB, jB) == true) {
+								Common::gotoXY(_b->getXInConsole(jB), _b->getYInConsole(iB));
+								_b->cellColor(_b->getXInConsole(jB), _b->getYInConsole(iB), BLUE, WHITE);
+							}
+							else {
+								Common::gotoXY(_b->getXInConsole(jB), _b->getYInConsole(iB));
+								_b->cellColor(_b->getXInConsole(jB), _b->getYInConsole(iB), BLACK, WHITE);
+							}
+
+							if (_b->getCharacterByXY(x, y) == '0') {
+								Common::gotoXY(x, y);
+								_b->cellColor(x, y, WHITE, WHITE);
+							}
+							else {
+								Common::gotoXY(x, y);
+								_b->cellColor(x, y, WHITE, BLACK);
+							}
+						}
 						return true;
 					}
 				}

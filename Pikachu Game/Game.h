@@ -13,6 +13,7 @@ struct Game {
 	bool _isPairValidExisted; // Kiểm tra còn cặp nào thỏa mãn hay không
 	int _cntCellMatch; // Đếm xem đã xóa bao nhiêu character 
 	int _cntEnter; // Biến enter
+	bool _help; // Người chơi cần giúp đỡ
 	Board* _b; // Tạo bảng game
 
 	Game();
