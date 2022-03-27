@@ -2,6 +2,7 @@
 #include "Board.h"
 #include "Common.h"
 #include <algorithm>
+#include <ctime>
 using namespace std;
 
 struct Game {
@@ -14,6 +15,8 @@ struct Game {
 	int _cntCellMatch; // Đếm xem đã xóa bao nhiêu character 
 	int _cntEnter; // Biến enter
 	bool _help; // Người chơi cần giúp đỡ
+	int _time; // Thời gian chơi game
+	int _score; // điểm của người chơi
 	Board* _b; // Tạo bảng game
 
 	Game();

@@ -9,6 +9,8 @@ Game::Game() {
 	_isEndGame = false;
 	_isLoop = true; // Game đang chạy
 	_help = false;
+	_score = 0;
+	_time = time(0);
 	_b = new Board(6); // Tạo bảng game size = 6
 }
 
@@ -354,6 +356,8 @@ void Game::solveMatching() {
 
 		// ô 1 và ô 2 match với nhau
 		if (checkMatching(firstBlock, secondBlock) == true) {
+			_score += 100; // Cộng 100 điểm khi match thành công
+
 			_cntCellMatch += 2; //  Đã xóa được thêm 2 ô
 			_b->setCharacterByIJ(iA, jA); // xóa ô 1 trong bảng
 			_b->setCharacterByIJ(iB, jB); // xóa ô 2 trong mảng
@@ -418,6 +422,8 @@ bool Game::checkPairValidExisted() {
 					pair<int, int> secondBlock(iB, jB);
 					if (checkMatching(firstBlock, secondBlock) == true) {
 						if (_help == true) {
+							_score -= 50; // Sử dụng help thì mất 50 điểm
+
 							int x = _x;
 							int y = _y;
 
@@ -484,6 +490,8 @@ bool Game::endGame() {
 			Common::gotoXY(50, 27);
 			cout << "Lose";
 		}
+		Common::gotoXY(50, 29);
+		cout << _score << " " << time(0) - _time;
 	}
 
 	return _isEndGame;
