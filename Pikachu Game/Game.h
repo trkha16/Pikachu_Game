@@ -36,7 +36,6 @@ struct Game {
 	void setX(int);
 	void setY(int);
 
-
 	int checkIMatching(pair<int, int>, pair<int, int>);
 	bool checkZMatching(pair<int, int>, pair<int, int>);
 	bool checkUMatching(pair<int, int>, pair<int, int>);

@@ -31,4 +31,5 @@ struct Board {
 	int getJByXConsole(int); // Lấy index i trên bảng từ vị trí X trên console 
 	bool isCharacterLocked(int, int); // Kiểm tra xem ô này đã bị lock hay chưa
 	void setCharacterLocked(int, int); // Gán giá trị cho _Lock[i][j]
+	void deleteCellInConsoleWhenMatched(int, int); // Xóa ô trên console khi match
 };

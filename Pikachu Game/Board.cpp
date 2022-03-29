@@ -222,3 +222,62 @@ bool Board::isCharacterLocked(int i, int j) {
 void Board::setCharacterLocked(int i, int j) {
 	_LOCK[i][j] = 1 - _LOCK[i][j];
 }
+
+void Board::deleteCellInConsoleWhenMatched(int i, int j) {
+	// góc trái trên
+	if (_A[i - 1][j - 1] == '0' && _A[i][j - 1] == '0' && _A[i - 1][j] == '0') {
+		Common::setConsoleColor(BLACK, BLACK);
+		Common::gotoXY(getXInConsole(j) - 4, getYInConsole(i) - 2);
+		putchar(32);
+	}
+	// góc phải trên
+	if (_A[i - 1][j + 1] == '0' && _A[i][j + 1] == '0' && _A[i - 1][j] == '0') {
+		Common::setConsoleColor(BLACK, BLACK);
+		Common::gotoXY(getXInConsole(j) + 4, getYInConsole(i) - 2);
+		putchar(32);
+	}
+	// góc trái dưới
+	if (_A[i + 1][j - 1] == '0' && _A[i][j - 1] == '0' && _A[i + 1][j] == '0') {
+		Common::setConsoleColor(BLACK, BLACK);
+		Common::gotoXY(getXInConsole(j) - 4, getYInConsole(i) + 2);
+		putchar(32);
+	}
+	// góc phải dưới
+	if (_A[i + 1][j + 1] == '0' && _A[i][j + 1] == '0' && _A[i + 1][j] == '0') {
+		Common::setConsoleColor(BLACK, BLACK);
+		Common::gotoXY(getXInConsole(j) + 4, getYInConsole(i) + 2);
+		putchar(32);
+	}
+	// biên trên
+	if (_A[i - 1][j] == '0') {
+		Common::setConsoleColor(BLACK, BLACK);
+		for (int k = -3; k <= 3; k++) {
+			Common::gotoXY(getXInConsole(j) + k, getYInConsole(i) - 2);
+			putchar(32);
+		}
+	}
+	// biên trái
+	if (_A[i][j - 1] == '0') {
+		Common::setConsoleColor(BLACK, BLACK);
+		for (int k = -1; k <= 1; k++) {
+			Common::gotoXY(getXInConsole(j) - 4, getYInConsole(i) + k);
+			putchar(32);
+		}
+	}
+	// biên phải
+	if (_A[i][j + 1] == '0') {
+		Common::setConsoleColor(BLACK, BLACK);
+		for (int k = -1; k <= 1; k++) {
+			Common::gotoXY(getXInConsole(j) + 4, getYInConsole(i) + k);
+			putchar(32);
+		}
+	}
+	// biên dưới
+	if (_A[i + 1][j] == '0') {
+		Common::setConsoleColor(BLACK, BLACK);
+		for (int k = -3; k <= 3; k++) {
+			Common::gotoXY(getXInConsole(j) + k, getYInConsole(i) + 2);
+			putchar(32);
+		}
+	}
+}

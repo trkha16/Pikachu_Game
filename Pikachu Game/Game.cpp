@@ -366,6 +366,9 @@ void Game::solveMatching() {
 			_b->setCharacterByIJ(iA, jA); // xóa ô 1 trong bảng
 			_b->setCharacterByIJ(iB, jB); // xóa ô 2 trong mảng
 
+			_b->deleteCellInConsoleWhenMatched(firstBlock.first, firstBlock.second);
+			_b->deleteCellInConsoleWhenMatched(secondBlock.first, secondBlock.second);
+
 			_isPairValidExisted = checkPairValidExisted(); // Kiểm tra xem còn cặp hợp lệ ko
 
 			// Màu xanh lá báo 2 ô match thành công
