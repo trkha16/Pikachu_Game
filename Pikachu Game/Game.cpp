@@ -23,7 +23,7 @@ void Game::startGame() {
 	_b->drawBoard(); // vẽ bảng
 	_b->randomCharacter(); // random mảng
 	_b->printCharacter(); // in character trong mảng ra console 
-	
+
 	// Focus vào phần tử đầu
 	Common::gotoXY(5, 3);
 	_b->cellColor(_x, _y, WHITE, BLACK);
@@ -101,7 +101,7 @@ void Game::moveUp() {
 		else {
 			_b->cellColor(_x, _y, WHITE, BLACK);
 		}
-		
+
 	}
 }
 
@@ -174,17 +174,17 @@ void Game::moveRight() {
 	}
 }
 
-bool Game::checkIMatching(pair<int, int> firstBlock, pair<int, int> secondBlock) {
+int Game::checkIMatching(pair<int, int> firstBlock, pair<int, int> secondBlock) {
 	int iA = firstBlock.first;
 	int jA = firstBlock.second;
 	int iB = secondBlock.first;
 	int jB = secondBlock.second;
 
-	if (iA == iB && jA == jB) return true; // 2 điểm là một
+	if (iA == iB && jA == jB) return 2; // 2 điểm là một
 
 	// Không cùng hàng hoặc cột
 	if ((iA != iB) && (jA != jB)) {
-		return false;
+		return 0;
 	}
 
 	// Kiểm tra hàng dọc
@@ -194,13 +194,15 @@ bool Game::checkIMatching(pair<int, int> firstBlock, pair<int, int> secondBlock)
 		}
 		for (int i = iA + 1; i < iB; i++) {
 			if (_b->getCharacterByIJ(i, jA) != '0') {
-				return false;
+				return 0;
 			}
 		}
 		if ((_b->getCharacterByIJ(iA, jA) == '0')
-			|| (_b->getCharacterByIJ(iB, jB) == '0')
-			|| checkCharacterMatching(firstBlock, secondBlock) == true) {
-			return true;
+			|| (_b->getCharacterByIJ(iB, jB) == '0')) {
+			return 2;
+		}
+		if (checkCharacterMatching(firstBlock, secondBlock) == true) {
+			return 1;
 		}
 	}
 
@@ -211,16 +213,18 @@ bool Game::checkIMatching(pair<int, int> firstBlock, pair<int, int> secondBlock)
 		}
 		for (int i = jA + 1; i < jB; i++) {
 			if (_b->getCharacterByIJ(iA, i) != '0') {
-				return false;
+				return 0;
 			}
 		}
 		if ((_b->getCharacterByIJ(iA, jA) == '0')
-			|| (_b->getCharacterByIJ(iB, jB) == '0')
-			|| checkCharacterMatching(firstBlock, secondBlock) == true) {
-			return true;
+			|| (_b->getCharacterByIJ(iB, jB) == '0')) {
+			return 2;
+		}
+		if (checkCharacterMatching(firstBlock, secondBlock) == true) {
+			return 1;
 		}
 	}
-	return false;
+	return 0;
 }
 
 bool Game::checkZMatching(pair<int, int> firstBlock, pair<int, int> secondBlock) {
@@ -279,11 +283,11 @@ bool Game::checkUMatching(pair<int, int> firstBlock, pair<int, int> secondBlock)
 	for (int i = 0; i <= _b->getSize() + 1; i++) {
 		pair<int, int> break1(iA, i);
 		pair<int, int> break2(iB, i);
-		bool line1 = checkIMatching(firstBlock, break1);
-		bool line2 = checkIMatching(break1, break2);
-		bool line3 = checkIMatching(break2, secondBlock);
+		int line1 = checkIMatching(firstBlock, break1);
+		int line2 = checkIMatching(break1, break2);
+		int line3 = checkIMatching(break2, secondBlock);
 
-		if (line1 && line2 && line3) return true;
+		if (line1 == 2 && line2 == 2 && line3 == 2) return true;
 	}
 
 	// Duyệt theo chiều dọc ngang dọc
@@ -295,11 +299,11 @@ bool Game::checkUMatching(pair<int, int> firstBlock, pair<int, int> secondBlock)
 	for (int i = 0; i <= _b->getSize() + 1; i++) {
 		pair<int, int> break1(i, jA);
 		pair<int, int> break2(i, jB);
-		bool line1 = checkIMatching(firstBlock, break1);
-		bool line2 = checkIMatching(break1, break2);
-		bool line3 = checkIMatching(break2, secondBlock);
+		int line1 = checkIMatching(firstBlock, break1);
+		int line2 = checkIMatching(break1, break2);
+		int line3 = checkIMatching(break2, secondBlock);
 
-		if (line1 && line2 && line3) return true;
+		if (line1 == 2 && line2 == 2 && line3 == 2) return true;
 	}
 
 	return false;
@@ -361,7 +365,7 @@ void Game::solveMatching() {
 			_cntCellMatch += 2; //  Đã xóa được thêm 2 ô
 			_b->setCharacterByIJ(iA, jA); // xóa ô 1 trong bảng
 			_b->setCharacterByIJ(iB, jB); // xóa ô 2 trong mảng
-			
+
 			_isPairValidExisted = checkPairValidExisted(); // Kiểm tra xem còn cặp hợp lệ ko
 
 			// Màu xanh lá báo 2 ô match thành công

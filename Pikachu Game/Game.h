@@ -37,7 +37,7 @@ struct Game {
 	void setY(int);
 
 
-	bool checkIMatching(pair<int, int>, pair<int, int>);
+	int checkIMatching(pair<int, int>, pair<int, int>);
 	bool checkZMatching(pair<int, int>, pair<int, int>);
 	bool checkUMatching(pair<int, int>, pair<int, int>);
 	bool checkCharacterMatching(pair<int, int>, pair<int, int>); // Kiểm tra giá trị 2 char có bằng nhau
