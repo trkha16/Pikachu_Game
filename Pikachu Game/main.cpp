@@ -7,6 +7,6 @@ int main() {
 	Common::setUpConsole();
 	Game g;
 	g.startGame();
-	Sleep(5000);
+	Sleep(2000);
 	return 0;
 }

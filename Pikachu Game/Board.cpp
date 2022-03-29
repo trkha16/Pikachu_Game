@@ -225,24 +225,168 @@ void Board::setCharacterLocked(int i, int j) {
 
 void Board::deleteCellInConsoleWhenMatched(int i, int j) {
 	// góc trái trên
+	if (_A[i - 1][j] != '0') {
+		Common::setConsoleColor(BLACK, WHITE);
+		Common::gotoXY(getXInConsole(j) - 4, getYInConsole(i) - 2);
+		putchar(200);
+	}
+
+	if (_A[i - 1][j - 1] != '0') {
+		Common::setConsoleColor(BLACK, WHITE);
+		Common::gotoXY(getXInConsole(j) - 4, getYInConsole(i) - 2);
+		putchar(188);
+	}
+
+	if (_A[i][j - 1] != '0') {
+		Common::setConsoleColor(BLACK, WHITE);
+		Common::gotoXY(getXInConsole(j) - 4, getYInConsole(i) - 2);
+		putchar(187);
+	}
+
+	if (_A[i - 1][j] != '0' && _A[i - 1][j - 1] != '0') {
+		Common::setConsoleColor(BLACK, WHITE);
+		Common::gotoXY(getXInConsole(j) - 4, getYInConsole(i) - 2);
+		putchar(202);
+	}
+
+	if (_A[i - 1][j - 1] != '0' && _A[i][j - 1] != '0') {
+		Common::setConsoleColor(BLACK, WHITE);
+		Common::gotoXY(getXInConsole(j) - 4, getYInConsole(i) - 2);
+		putchar(185);
+	}
+
+	if (_A[i - 1][j] != '0' && _A[i][j - 1] != '0') {
+		Common::setConsoleColor(BLACK, WHITE);
+		Common::gotoXY(getXInConsole(j) - 4, getYInConsole(i) - 2);
+		putchar(206);
+	}
+
 	if (_A[i - 1][j - 1] == '0' && _A[i][j - 1] == '0' && _A[i - 1][j] == '0') {
 		Common::setConsoleColor(BLACK, BLACK);
 		Common::gotoXY(getXInConsole(j) - 4, getYInConsole(i) - 2);
 		putchar(32);
 	}
 	// góc phải trên
-	if (_A[i - 1][j + 1] == '0' && _A[i][j + 1] == '0' && _A[i - 1][j] == '0') {
+	if (_A[i - 1][j] != '0') {
+		Common::setConsoleColor(BLACK, WHITE);
+		Common::gotoXY(getXInConsole(j) + 4, getYInConsole(i) - 2);
+		putchar(188);
+	}
+
+	if (_A[i - 1][j + 1] != '0') {
+		Common::setConsoleColor(BLACK, WHITE);
+		Common::gotoXY(getXInConsole(j) + 4, getYInConsole(i) - 2);
+		putchar(200);
+	}
+
+	if (_A[i][j + 1] != '0') {
+		Common::setConsoleColor(BLACK, WHITE);
+		Common::gotoXY(getXInConsole(j) + 4, getYInConsole(i) - 2);
+		putchar(201);
+	}
+
+	if (_A[i - 1][j] != '0' && _A[i - 1][j + 1] != '0') {
+		Common::setConsoleColor(BLACK, WHITE);
+		Common::gotoXY(getXInConsole(j) + 4, getYInConsole(i) - 2);
+		putchar(202);
+	}
+
+	if (_A[i - 1][j + 1] != '0' && _A[i][j + 1] != '0') {
+		Common::setConsoleColor(BLACK, WHITE);
+		Common::gotoXY(getXInConsole(j) + 4, getYInConsole(i) - 2);
+		putchar(204);
+	}
+
+	if (_A[i - 1][j] != '0' && _A[i][j + 1] != '0') {
+		Common::setConsoleColor(BLACK, WHITE);
+		Common::gotoXY(getXInConsole(j) + 4, getYInConsole(i) - 2);
+		putchar(206);
+	}
+
+	if (_A[i - 1][j] == '0' && _A[i][j + 1] == '0' && _A[i - 1][j + 1] == '0') {
 		Common::setConsoleColor(BLACK, BLACK);
 		Common::gotoXY(getXInConsole(j) + 4, getYInConsole(i) - 2);
 		putchar(32);
 	}
 	// góc trái dưới
+	if (_A[i + 1][j] != '0') {
+		Common::setConsoleColor(BLACK, WHITE);
+		Common::gotoXY(getXInConsole(j) - 4, getYInConsole(i) + 2);
+		putchar(201);
+	}
+
+	if (_A[i + 1][j - 1] != '0') {
+		Common::setConsoleColor(BLACK, WHITE);
+		Common::gotoXY(getXInConsole(j) - 4, getYInConsole(i) + 2);
+		putchar(187);
+	}
+
+	if (_A[i][j - 1] != '0') {
+		Common::setConsoleColor(BLACK, WHITE);
+		Common::gotoXY(getXInConsole(j) - 4, getYInConsole(i) + 2);
+		putchar(188);
+	}
+
+	if (_A[i + 1][j] != '0' && _A[i + 1][j - 1] != '0') {
+		Common::setConsoleColor(BLACK, WHITE);
+		Common::gotoXY(getXInConsole(j) - 4, getYInConsole(i) + 2);
+		putchar(203);
+	}
+
+	if (_A[i + 1][j - 1] != '0' && _A[i][j - 1] != '0') {
+		Common::setConsoleColor(BLACK, WHITE);
+		Common::gotoXY(getXInConsole(j) - 4, getYInConsole(i) + 2);
+		putchar(185);
+	}
+
+	if (_A[i + 1][j] != '0' && _A[i][j - 1] != '0') {
+		Common::setConsoleColor(BLACK, WHITE);
+		Common::gotoXY(getXInConsole(j) - 4, getYInConsole(i) + 2);
+		putchar(206);
+	}
+
 	if (_A[i + 1][j - 1] == '0' && _A[i][j - 1] == '0' && _A[i + 1][j] == '0') {
 		Common::setConsoleColor(BLACK, BLACK);
 		Common::gotoXY(getXInConsole(j) - 4, getYInConsole(i) + 2);
 		putchar(32);
 	}
 	// góc phải dưới
+	if (_A[i + 1][j] != '0') {
+		Common::setConsoleColor(BLACK, WHITE);
+		Common::gotoXY(getXInConsole(j) + 4, getYInConsole(i) + 2);
+		putchar(187);
+	}
+
+	if (_A[i + 1][j + 1] != '0') {
+		Common::setConsoleColor(BLACK, WHITE);
+		Common::gotoXY(getXInConsole(j) + 4, getYInConsole(i) + 2);
+		putchar(201);
+	}
+
+	if (_A[i][j + 1] != '0') {
+		Common::setConsoleColor(BLACK, WHITE);
+		Common::gotoXY(getXInConsole(j) + 4, getYInConsole(i) + 2);
+		putchar(200);
+	}
+
+	if (_A[i + 1][j] != '0' && _A[i + 1][j + 1] != '0') {
+		Common::setConsoleColor(BLACK, WHITE);
+		Common::gotoXY(getXInConsole(j) + 4, getYInConsole(i) + 2);
+		putchar(203);
+	}
+
+	if (_A[i + 1][j + 1] != '0' && _A[i][j + 1] != '0') {
+		Common::setConsoleColor(BLACK, WHITE);
+		Common::gotoXY(getXInConsole(j) + 4, getYInConsole(i) + 2);
+		putchar(204);
+	}
+
+	if (_A[i + 1][j] != '0' && _A[i][j + 1] != '0') {
+		Common::setConsoleColor(BLACK, WHITE);
+		Common::gotoXY(getXInConsole(j) + 4, getYInConsole(i) + 2);
+		putchar(206);
+	}
+
 	if (_A[i + 1][j + 1] == '0' && _A[i][j + 1] == '0' && _A[i + 1][j] == '0') {
 		Common::setConsoleColor(BLACK, BLACK);
 		Common::gotoXY(getXInConsole(j) + 4, getYInConsole(i) + 2);
