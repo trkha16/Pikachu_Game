@@ -5,7 +5,7 @@ HANDLE Common::consoleOutput = GetStdHandle(STD_OUTPUT_HANDLE);
 
 void Common::setUpConsole()
 {
-	setFontInfo();
+	setFontInfo(10, 21);
 	setAndCenterWindow();
 	disableMaximize();
 	setConsoleTitle();
@@ -57,13 +57,13 @@ void Common::showCursor(bool show)
 	SetConsoleCursorInfo(consoleOutput, &info);
 }
 
-void Common::setFontInfo()
+void Common::setFontInfo(int x, int y)
 {
 	CONSOLE_FONT_INFOEX info;
 	info.cbSize = sizeof(info);
 	GetCurrentConsoleFontEx(consoleOutput, FALSE, &info);
-	info.dwFontSize.X = 10;
-	info.dwFontSize.Y = 21;
+	info.dwFontSize.X = x;
+	info.dwFontSize.Y = y;
 	wcscpy_s(info.FaceName, L"Consolas");
 	SetCurrentConsoleFontEx(consoleOutput, FALSE, &info);
 }

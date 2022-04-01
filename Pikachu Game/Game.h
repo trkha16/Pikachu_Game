@@ -43,4 +43,5 @@ struct Game {
 	bool checkMatching(pair<int, int>, pair<int, int>); // Kiểm tra 2 ô đó có match với nhau
 	void solveMatching(); // Xử lý matching
 	bool checkPairValidExisted(); // Kiểm tra xem còn cặp nào có thể matching được với nhau không 
+	void printGameScreen(); // In các chi tiết của game ra console 
 };

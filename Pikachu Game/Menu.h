@@ -1,14 +1,18 @@
 #pragma once
 #include <iostream>
 #include <string>
+#include "Common.h"
+#include "Game.h"
 using namespace std;
 
 struct Menu {
-	string Menus[5] = {
-		"Play",
-		"Tutorial",
-		"Leaderboard",
-		"Exit"
+	string _Menu[5] = {
+		"PLAY",
+		"TUTORIAL",
+		"LEADERBOARD",
+		"EXIT"
 	};
 	int index = 0;
+
+	void mainScreen(); // Màn hình chính vào game
 };

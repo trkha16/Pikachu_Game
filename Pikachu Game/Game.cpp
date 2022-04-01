@@ -20,9 +20,7 @@ Game::~Game() {
 }
 
 void Game::startGame() {
-	_b->drawBoard(); // vẽ bảng
-	_b->randomCharacter(); // random mảng
-	_b->printCharacter(); // in character trong mảng ra console 
+	printGameScreen(); // In các chi tiết game ra màn hình
 
 	// Focus vào phần tử đầu
 	Common::gotoXY(5, 3);
@@ -389,6 +387,14 @@ void Game::solveMatching() {
 			// Tô lại màu cho ô 2
 			Common::gotoXY(_b->getXInConsole(jB), _b->getYInConsole(iB));
 			_b->cellColor(_b->getXInConsole(jB), _b->getYInConsole(iB), WHITE, WHITE);
+		
+			string s = to_string(_score);
+			while (s.size() < 5) {
+				s = '0' + s;
+			}
+			Common::gotoXY(70 + 17, 8);
+			Common::setConsoleColor(BLACK, WHITE);
+			cout << s;
 		}
 		else { // Nếu 2 ô không match với nhau
 			// Màu đỏ báo 2 ô không match được
@@ -429,7 +435,7 @@ bool Game::checkPairValidExisted() {
 					pair<int, int> secondBlock(iB, jB);
 					if (checkMatching(firstBlock, secondBlock) == true) {
 						if (_help == true) {
-							_score -= 50; // Sử dụng help thì mất 50 điểm
+							_score = max(0, _score - 50); // Sử dụng help thì mất 50 điểm
 
 							int x = _x;
 							int y = _y;
@@ -472,6 +478,14 @@ bool Game::checkPairValidExisted() {
 								Common::gotoXY(x, y);
 								_b->cellColor(x, y, WHITE, BLACK);
 							}
+
+							string s = to_string(_score);
+							while (s.size() < 5) {
+								s = '0' + s;
+							}
+							Common::gotoXY(70 + 17, 8);
+							Common::setConsoleColor(BLACK, WHITE);
+							cout << s;
 						}
 						return true;
 					}
@@ -502,4 +516,11 @@ bool Game::endGame() {
 	}
 
 	return _isEndGame;
+}
+
+void Game::printGameScreen() {
+	_b->drawBoard(); // vẽ bảng
+	_b->randomCharacter(); // random mảng
+	_b->printCharacter(); // in character trong mảng ra console 
+	_b->printScoreBoard(); // In bảng điểm ra console 
 }

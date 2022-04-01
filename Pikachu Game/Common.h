@@ -40,7 +40,7 @@ struct Common
 	static void setConsoleTitle();            //Cài đặt tiêu đề console
 	static void disableMaximize();            //Vô hiệu hóa phóng to màn hình
 	static void showCursor(bool);             //Ẩn hoặc hiện con trỏ
-	static void setFontInfo();                //Cài đặt font chữ
+	static void setFontInfo(int, int);                //Cài đặt font chữ
 	static void clearConsole();               //Xóa màn hình console
 	static void disableMouseInput();          //Vô hiệu hóa chuột trong console
 	static int getConsoleInput();             //Lấy lệnh từ bàn phím

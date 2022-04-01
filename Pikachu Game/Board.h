@@ -32,4 +32,5 @@ struct Board {
 	bool isCharacterLocked(int, int); // Kiểm tra xem ô này đã bị lock hay chưa
 	void setCharacterLocked(int, int); // Gán giá trị cho _Lock[i][j]
 	void deleteCellInConsoleWhenMatched(int, int); // Xóa ô trên console khi match
+	void printScoreBoard(); // Hiển thị bảng điểm và chi tiết game
 };

@@ -425,3 +425,47 @@ void Board::deleteCellInConsoleWhenMatched(int i, int j) {
 		}
 	}
 }
+
+void Board::printScoreBoard() {
+	int STARTX = 70;
+	int COLUMN = 41; // ĐỘ DÀI BẢNG
+	int ROW = 4 * _size + 1;; // ĐỘ CAO BẢNG
+
+	// Tao bien tren cua bang
+	Common::gotoXY(STARTX, 1);
+	putchar(201); // Góc trái trên
+	for (int i = 2; i < COLUMN; i++) {
+		Common::gotoXY(STARTX + i - 1, 1);
+		putchar(205);
+	}
+	Common::gotoXY(COLUMN + STARTX - 1, 1);
+	putchar(187); // góc phải trên
+
+	// Tao bien duoi cua bang
+	Common::gotoXY(STARTX, ROW);
+	putchar(200); // góc trái dưới
+	for (int i = 2; i < COLUMN; i++) {
+		Common::gotoXY(STARTX + i - 1, ROW);
+		putchar(205);
+	}
+	Common::gotoXY(COLUMN + STARTX - 1, ROW);
+	putchar(188); // góc phải dưới
+
+	//Tao bien trai cua bang
+	for (int i = 2; i < ROW; i++) {
+		Common::gotoXY(STARTX, i);
+		putchar(186);
+	}
+
+	//Tao bien phai cua bang
+	for (int i = 2; i < ROW; i++) {
+		Common::gotoXY(COLUMN + STARTX - 1, i);
+		putchar(186);
+	}
+
+	Common::gotoXY(STARTX + 17, 5);
+	cout << "SCORE";
+
+	Common::gotoXY(STARTX + 17, 8);
+	cout << "00000";
+}
