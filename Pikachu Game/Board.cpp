@@ -469,3 +469,12 @@ void Board::printScoreBoard() {
 	Common::gotoXY(STARTX + 17, 8);
 	cout << "00000";
 }
+
+void Board::printButton() {
+	Common::gotoXY(75, 30);
+	Common::setConsoleColor(BLACK, LIGHT_AQUA);
+	cout << "H: HELP";
+
+	Common::gotoXY(98, 30);
+	cout << "ESC: EXIT";
+}

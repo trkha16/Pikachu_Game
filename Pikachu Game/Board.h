@@ -33,4 +33,5 @@ struct Board {
 	void setCharacterLocked(int, int); // Gán giá trị cho _Lock[i][j]
 	void deleteCellInConsoleWhenMatched(int, int); // Xóa ô trên console khi match
 	void printScoreBoard(); // Hiển thị bảng điểm và chi tiết game
+	void printButton(); // Hiển thị các nút thao tác game
 };

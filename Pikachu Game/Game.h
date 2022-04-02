@@ -3,6 +3,8 @@
 #include "Common.h"
 #include <algorithm>
 #include <ctime>
+#include <string>
+#include <fstream>
 using namespace std;
 
 struct Game {
@@ -17,6 +19,7 @@ struct Game {
 	bool _help; // Người chơi cần giúp đỡ
 	int _time; // Thời gian chơi game
 	int _score; // điểm của người chơi
+	string _name = "Tran Binh Kha"; // Tên của người chơi
 	Board* _b; // Tạo bảng game
 
 	Game();
@@ -44,4 +47,5 @@ struct Game {
 	void solveMatching(); // Xử lý matching
 	bool checkPairValidExisted(); // Kiểm tra xem còn cặp nào có thể matching được với nhau không 
 	void printGameScreen(); // In các chi tiết của game ra console 
+	void saveData(); // tạo leaderboard
 };

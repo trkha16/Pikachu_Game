@@ -511,8 +511,10 @@ bool Game::endGame() {
 			Common::gotoXY(50, 27);
 			cout << "Lose";
 		}
+		_time = time(0) - _time;
 		Common::gotoXY(50, 29);
-		cout << _score << " " << time(0) - _time;
+		cout << _score << " " << _time;
+		saveData();
 	}
 
 	return _isEndGame;
@@ -522,5 +524,17 @@ void Game::printGameScreen() {
 	_b->drawBoard(); // vẽ bảng
 	_b->randomCharacter(); // random mảng
 	_b->printCharacter(); // in character trong mảng ra console 
-	_b->printScoreBoard(); // In bảng điểm ra console 
+	_b->printScoreBoard(); // In bảng điểm ra console
+	_b->printButton();
+}
+
+void Game::saveData() {
+	fstream fs("leaderboard.txt", ios::app);
+	if (fs) {
+		fs << _name << "/" << _score << "/" << _time << '\n';
+	}
+	else {
+		cout << "Error opening file";
+	}
+	fs.close();
 }
