@@ -15,4 +15,5 @@ struct Menu {
 	int index = 0;
 
 	void mainScreen(); // Màn hình chính vào game
+	static void endScreen(); // Màn hình khi hoàn thành game
 };

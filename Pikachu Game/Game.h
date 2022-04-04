@@ -1,6 +1,7 @@
 ﻿#pragma once
 #include "Board.h"
 #include "Common.h"
+#include "Menu.h"
 #include <algorithm>
 #include <ctime>
 #include <string>

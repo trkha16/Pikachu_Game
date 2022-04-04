@@ -502,19 +502,9 @@ bool Game::endGame() {
 		|| (_isPairValidExisted == false);
 	if (_isEndGame == true) {
 		_isLoop = false;
-		Common::setConsoleColor(WHITE, BLACK);
-		if (_cntCellMatch == _b->getSize() * _b->getSize()) {
-			Common::gotoXY(50, 27);
-			cout << "Win";
-		}
-		else {
-			Common::gotoXY(50, 27);
-			cout << "Lose";
-		}
 		_time = time(0) - _time;
-		Common::gotoXY(50, 29);
-		cout << _score << " " << _time;
 		saveData();
+		Menu::endScreen();
 	}
 
 	return _isEndGame;
