@@ -6,7 +6,8 @@
 int main() {
 	srand(time(0));
 	Common::setUpConsole();
-	Game g;
-	g.startGame();
+	/*Game g;
+	g.startGame();*/
+	Menu::leaderboardScreen();
 	return 0;
 }
