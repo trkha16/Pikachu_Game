@@ -3,17 +3,9 @@
 #include <string>
 #include "Common.h"
 #include "Game.h"
+#include "Board.h"
 using namespace std;
 
 struct Menu {
-	string _Menu[5] = {
-		"PLAY",
-		"TUTORIAL",
-		"LEADERBOARD",
-		"EXIT"
-	};
-	int index = 0;
-
-	void mainScreen(); // Màn hình chính vào game
-	static void endScreen(); // Màn hình khi hoàn thành game
+	static void endScreen(int, int); // Màn hình khi hoàn thành game
 };

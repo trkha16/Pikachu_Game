@@ -504,13 +504,16 @@ bool Game::endGame() {
 		_isLoop = false;
 		_time = time(0) - _time;
 		saveData();
-		Menu::endScreen();
+		Sleep(300);
+		Menu::endScreen(_score, _time);
 	}
 
 	return _isEndGame;
 }
 
 void Game::printGameScreen() {
+	Common::clearConsole();
+	Common::setConsoleColor(BLACK, WHITE);
 	_b->drawBoard(); // vẽ bảng
 	_b->randomCharacter(); // random mảng
 	_b->printCharacter(); // in character trong mảng ra console 
