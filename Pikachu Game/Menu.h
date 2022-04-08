@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 #include <iostream>
 #include <string>
 #include "Common.h"
@@ -10,6 +10,7 @@
 using namespace std;
 
 struct Menu {
-	static void endScreen(int, int); // M�n h�nh khi ho�n th�nh game
-	static void leaderboardScreen(); // M�n h�nh leaderboard
+	static void endScreen(int, int); // Màn hình khi hoàn thành game
+	static void leaderboardScreen(); // Màn hình leaderboard
+	static void drawBoardLeaderboard(); // vẽ bảng hiển thị của leaderboard
 };
