@@ -20,7 +20,7 @@ struct Game {
 	bool _help; // Người chơi cần giúp đỡ
 	int _time;// Thời gian chơi game
 	int _score; // điểm của người chơi
-	string _name = "Tran Binh Kha"; // Tên của người chơi
+	string _name; // Tên của người chơi
 	Board* _b; // Tạo bảng game
 
 	Game();

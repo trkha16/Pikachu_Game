@@ -11,6 +11,7 @@ Game::Game() {
 	_help = false;
 	_score = 0;
 	_time = time(0);
+	_name = Menu::inputName();
 	_b = new Board(6); // Tạo bảng game size = 6
 }
 
@@ -20,6 +21,7 @@ Game::~Game() {
 }
 
 void Game::startGame() {
+	//Menu::inputName();
 	printGameScreen(); // In các chi tiết game ra màn hình
 
 	// Focus vào phần tử đầu

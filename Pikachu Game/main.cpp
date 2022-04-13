@@ -6,8 +6,9 @@
 int main() {
 	srand(time(0));
 	Common::setUpConsole();
-	/*Game g;
-	g.startGame();*/
-	Menu::leaderboardScreen();
+	Menu* p;
+	p->mainMenu();
+
+	Common::setConsoleColor(BLACK, WHITE);
 	return 0;
 }
