@@ -2,213 +2,6 @@
 
 string Menu::optionList[] = { " PLAY", " HOW TO PLAY", " LEADERBOARD", " EXIT" };
 
-void M(int x, int y, int h, int w, int textcolor) {
-	Common::setConsoleColor(BLACK, textcolor);
-	for (int i = 0; i <= h; i++) {
-		for (int j = 0; j <= w; j++) {
-			if (j == 0 || j == w) {
-				Common::gotoXY(x + j, y + i);
-				putchar(219);
-			}
-
-		}
-	}
-	int leftX = x + 1;
-	int rightX = x + w - 1;
-	int k = y;
-	while (leftX <= rightX) {
-		Common::gotoXY(leftX - 1, k);
-		putchar(219);
-		putchar(219);
-		Common::gotoXY(rightX, k);
-		putchar(219);
-		putchar(219);
-		k++;
-		leftX++;
-		rightX--;
-	}
-
-}
-
-void A(int x, int y, int h, int w, int textcolor) {
-	Common::setConsoleColor(BLACK, textcolor);
-
-	int leftX = x;
-	int rightX = x + w;
-	int i = y + h;
-	int midH = h / 2 + 1;
-	while (leftX <= rightX) {
-		if (i == y + midH) {
-			int j = leftX + 1;
-			Common::gotoXY(j, i);
-			while (j < rightX) {
-				putchar(254);
-				j++;
-			}
-		}
-		Common::gotoXY(leftX - 1, i);
-		putchar(219);
-		putchar(219);
-		Common::gotoXY(rightX, i);
-		putchar(219);
-		putchar(219);
-		i--;
-		leftX++;
-		rightX--;
-	}
-}
-
-void T(int x, int y, int h, int w, int textcolor) {
-	Common::setConsoleColor(BLACK, textcolor);
-
-	Common::gotoXY(x, y);
-	int midW = w / 2;
-	for (int i = 0; i <= w; i++) {
-
-		putchar(254);
-	}
-	for (int i = y + 1; i <= y + h; i++) {
-		Common::gotoXY(x + midW, i);
-		putchar(219);
-	}
-
-}
-
-void C(int x, int y, int h, int w, int textcolor) {
-	Common::setConsoleColor(BLACK, textcolor);
-
-	for (int i = y; i <= y + h; i++) {
-		if (i == y) {
-			Common::gotoXY(x + 1, i);
-			for (int j = x + 1; j <= x + w; j++) {
-				putchar(219);
-			}
-		}
-		else if (i == y + h) {
-			Common::gotoXY(x + 1, i);
-			for (int j = x + 1; j <= x + w; j++) {
-				putchar(219);
-			}
-		}
-		else {
-			Common::gotoXY(x, i);
-			putchar(219);
-			putchar(219);
-		}
-	}
-}
-
-void H(int x, int y, int h, int w, int textcolor) {
-	Common::setConsoleColor(BLACK, textcolor);
-
-	for (int i = y; i <= y + h; i++) {
-		if (i == y + h / 2) {
-			Common::gotoXY(x + 1, i);
-			for (int j = x + 1; j < x + w; j++) {
-				putchar(254);
-			}
-		}
-		Common::gotoXY(x, i);
-		putchar(219);
-		Common::gotoXY(x + w, i);
-		putchar(219);
-	}
-}
-
-void I(int x, int y, int h, int w, int textcolor) {
-	Common::setConsoleColor(BLACK, textcolor);
-	for (int i = y; i <= y + h; i++) {
-
-		for (int j = x + 1; j <= x + w; j++) {
-			Common::gotoXY(j, i);
-			putchar(219);
-		}
-	}
-}
-
-void N(int x, int y, int h, int w, int textcolor) {
-	Common::setConsoleColor(BLACK, textcolor);
-
-	for (int i = y; i <= y + h; i++) {
-		Common::gotoXY(x, i);
-		putchar(219);
-		Common::gotoXY(x + w, i);
-		putchar(219);
-	}
-
-	int leftX = x + 1;
-	int rightX = x + w - 1;
-	int k = y;
-	while (leftX <= rightX && k <= y + h) {
-		Common::gotoXY(leftX++, k);
-		putchar(219);
-		k++;
-	}
-
-}
-
-void G(int x, int y, int h, int w, int textcolor) {
-	Common::setConsoleColor(BLACK, textcolor);
-
-	for (int i = y; i <= y + h; i++) {
-		if (i == y) {
-			Common::gotoXY(x + 1, i);
-			for (int j = x + 1; j <= x + w; j++) {
-				putchar(219);
-			}
-		}
-		else if (i == y + h) {
-			Common::gotoXY(x + 1, i);
-			for (int j = x + 1; j <= x + w; j++) {
-				putchar(219);
-			}
-		}
-		else {
-			Common::gotoXY(x, i);
-			putchar(219);
-			putchar(219);
-			if (i >= y + h / 2 && i < y + h) {
-				if (i == y + h / 2) {
-					Common::gotoXY(x + w - 2, i);
-					putchar(219);
-					putchar(219);
-					putchar(219);
-				}
-				else {
-					Common::gotoXY(x + w, i);
-					putchar(219);
-				}
-			}
-		}
-	}
-}
-
-void E(int x, int y, int h, int w, int textcolor) {
-	Common::setConsoleColor(BLACK, textcolor);
-
-	for (int i = y; i <= y + h; i++) {
-		if (i == y) {
-			Common::gotoXY(x, i);
-			for (int j = x; j <= x + w; j++)
-				putchar(219);
-		}
-		else if (i == y + h / 3 + 1) {
-			Common::gotoXY(x, i);
-			for (int j = x; j <= x + w; j++)
-				putchar(219);
-		}
-		else if (i == y + h) {
-			Common::gotoXY(x, i);
-			for (int j = x; j <= x + w; j++)
-				putchar(219);
-		}
-		else {
-			Common::gotoXY(x, i);
-			putchar(219);
-		}
-	}
-}
-
 void Menu::drawLogo() {
 	Common::setConsoleColor(BLACK, LIGHT_AQUA);
 	Common::gotoXY(27, 3);
@@ -222,27 +15,12 @@ void Menu::drawLogo() {
 }
 
 void Menu::GameTitle() {
-
-	/*M(3, 2, 6, 9, RED);
-	A(14, 2, 6, 9, BLUE);
-	T(22, 2, 6, 6, YELLOW);
-	C(28, 4, 3, 5, BRIGHT_WHITE);
-	H(32, 2, 6, 6, LIGHT_RED);
-	I(40, 4, 3, 2, LIGHT_PURPLE);
-	N(45, 4, 3, 5, GRAY);
-	G(52, 2, 6, 5, GREEN);
-
-	G(65, 2, 6, 5, LIGHT_YELLOW);
-	A(70, 0, 8, 12, LIGHT_GREEN);
-	M(81, 2, 4, 7, RED);
-	E(90, 2, 6, 6, AQUA);*/
 	drawLogo();
 }
 
 void Menu::PlayMode() {
 	Common::gotoXY(43, 11);
 	Common::setConsoleColor(0, 6);
-	//Common::setFontInfo(20, 30);
 	cout << "Play Mode";
 }
 
@@ -308,10 +86,8 @@ void Menu::ExitGame() {
 	drawBorder(20, 1, 45, 8, 1);
 
 	Common::gotoXY(34, 3);
-	//Common::setFontInfo(0, 36);
 	cout << "Exit Confirmation";
 
-	//Common::setFontInfo(0, 14);
 	Common::gotoXY(26, 5);
 	cout << "Are you sure you want to quit game?";
 
@@ -344,6 +120,7 @@ void Menu::ExitGame() {
 			if (CurPos == 2) {
 				system("cls");
 				mainMenu();
+				break;
 			}
 		}
 		textcolor[0] = WHITE;
@@ -404,10 +181,6 @@ void Menu::setupMainOption() {
 	Common::setConsoleColor(BLACK, YELLOW);
 	drawBorder(55, 25, 16, 2, 4);
 
-	/*int widthPerChar = 30;
-	int heightPerChar = 20;*/
-	//Common::setFontInfo(widthPerChar, heightPerChar);
-
 	Common::showCursor(false);
 
 	int Xfor1stOpt = 60;
@@ -463,6 +236,7 @@ void Menu::setupMainOption() {
 			}
 			if (pos == 4) {
 				ExitGame();
+				break;
 			}
 		}
 		setTextColor[0] = YELLOW;

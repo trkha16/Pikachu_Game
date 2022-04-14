@@ -87,10 +87,12 @@ void Tutorial1() {
 		if (key == 75 || tolower(key) == 'a') {
 			system("cls");
 			Menu::mainMenu();
+			break;
 		}
 		if (key == 77 || tolower(key) == 'd') {
 			system("cls");
 			Tutorial2();
+			break;
 		}
 	}
 }
@@ -231,14 +233,17 @@ Common:ShowCursor(false);
 		if (key == 75 || tolower(key) == 'a') {
 			system("cls");
 			Tutorial1();
+			break;
 		}
 		if (key == 77 || tolower(key) == 'd') {
 			system("cls");
 			Tutorial3();
+			break;
 		}
 		if (key == 27) {
 			system("cls");
 			Menu::mainMenu();
+			break;
 		}
 	}
 }
@@ -568,19 +573,22 @@ void Tutorial3() {
 		if (key == 75 || tolower(key) == 'a') {
 			system("cls");
 			Tutorial2();
+			break;
 		}
 		if (key == 77 || tolower(key) == 'd') {
 			system("cls");
 			Tutorial4();
+			break;
 		}
 		if (key == 27) {
 			system("cls");
 			Menu::mainMenu();
+			break;
 		}
 	}
 
-	Common::gotoXY(2, 19);
-	cout << endl;
+	/*Common::gotoXY(2, 19);
+	cout << endl;*/
 }
 
 //=======TUTORIAL PAGE 4: SCORES AND OUTRO========
@@ -635,13 +643,15 @@ void Tutorial4() {
 		if (key == 75 || tolower(key) == 'a') {
 			system("cls");
 			Tutorial3();
+			break;
 		}
 		if (key == 27) {
 			system("cls");
 			Menu::mainMenu();
+			break;
 		}
 	}
 
-	Common::gotoXY(2, 19);
-	cout << endl;
+	//Common::gotoXY(2, 19);
+	//cout << endl;
 }
