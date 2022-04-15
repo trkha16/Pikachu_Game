@@ -9,9 +9,9 @@ Game::Game() {
 	_isEndGame = false;
 	_isLoop = true; // Game đang chạy
 	_help = false;
-	_score = 0;
-	_time = time(0);
-	_name = Menu::inputName();
+	_score = 0; // Điểm ban đầu = 0
+	_time = time(0); // Bắt đầu tính thời gian
+	_name = Menu::inputName(); // Nhập tên
 	_b = new Board(6); // Tạo bảng game size = 6
 }
 

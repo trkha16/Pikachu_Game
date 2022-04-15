@@ -135,3 +135,42 @@ int getRandomInt(int begin, int end)
 	uniform_int_distribution<int> dist(0, end);
 	return dist(mt);
 }
+
+void Common::drawBorder(int upperleftcornerX, int upperleftcornerY, int width, int Hpercell, int n) {
+	int x = upperleftcornerX;
+	int y = upperleftcornerY;
+
+	for (int i = y; i <= y + Hpercell * n; i++) {
+		if ((i - y) % Hpercell == 0) {
+			if (i == y) {
+				Common::gotoXY(x, i);
+				putchar(218);		//goc trai tren
+				Common::gotoXY(x + width, i);
+				putchar(191);		//goc phai tren
+			}
+			else if (i < y + Hpercell * n) {
+				Common::gotoXY(x, i);
+				putchar(195);		//nga 3 sang trai
+				Common::gotoXY(x + width, i);
+				putchar(180);		//nga 3 sang phai
+			}
+			else {
+				Common::gotoXY(x, i);
+				putchar(192);		//goc trai duoi
+				Common::gotoXY(x + width, i);
+				putchar(217);		//goc phai duoi
+			}
+			Common::gotoXY(x + 1, i);
+			for (int j = x + 1; j < x + width; j++) {
+				putchar(196);		//bien ngang
+			}
+		}
+		else {
+			Common::gotoXY(x, i);
+			putchar(179);			//bien doc
+			Common::gotoXY(x + width, i);
+			putchar(179);
+		}
+
+	}
+}

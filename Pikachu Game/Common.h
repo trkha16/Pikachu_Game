@@ -45,4 +45,5 @@ struct Common
 	static void disableMouseInput();          //Vô hiệu hóa chuột trong console
 	static int getConsoleInput();             //Lấy lệnh từ bàn phím
 	static void playSound(int);               //Phát âm thanh
+	static void drawBorder(int upperleftX, int upperleftY, int width, int Hpercell, int soluong);
 };

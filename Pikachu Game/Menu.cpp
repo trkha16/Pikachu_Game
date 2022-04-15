@@ -28,67 +28,19 @@ void Menu::Tutorial() {
 	Tutorial1();
 }
 
-void Menu::Leaderboard() {
-	Common::clearConsole();
-
-	ifstream fs;
-	fs.open("leaderboard.txt");
-
-	struct Player {
-		string name;
-		int score;
-		int time;
-	};
-
-	Player player[1000];
-	string s;
-	int size = 0;
-		if (fs) {
-			while (!fs.eof()) {
-				getline(fs, player[size].name, '/');
-				getline(fs, s, '/');
-				player[size].score = stoi(s);
-				getline(fs, s);
-				player[size].time = stoi(s);
-				size++;
-			}
-
-			for (int i = 0; i < size - 1; i++) {
-				for (int j = i + 1; j < size; j++) {
-					if (player[i].score < player[j].score) {
-						swap(player[i], player[j]);
-					}
-					else if (player[i].score == player[j].score) {
-						if (player[i].time > player[j].time) {
-							swap(player[i], player[j]);
-						}
-					}
-				}
-			}
-
-			//drawBoardLeaderboard();
-
-			for (int i = 0; i < min(10, size - 1); i++) {
-				//cout << player[i].score << endl;
-				cout << player[i].name << " " << player[i].score << " " << player[i].time << endl;
-			}
-		}
-		else {
-			cout << "Error opening file";
-		}
-	fs.close();
-}
-
 void Menu::ExitGame() {
 	system("cls");
 	Common::showCursor(false);
 	Common::setConsoleColor(BLACK, AQUA);
-	drawBorder(20, 1, 45, 8, 1);
 
-	Common::gotoXY(34, 3);
+	//20 1
+
+	Common::drawBorder(40, 13, 45, 8, 1);
+
+	Common::gotoXY(54, 15);
 	cout << "Exit Confirmation";
 
-	Common::gotoXY(26, 5);
+	Common::gotoXY(46, 17);
 	cout << "Are you sure you want to quit game?";
 
 	int textcolor[] = { RED,WHITE };
@@ -96,11 +48,11 @@ void Menu::ExitGame() {
 	int CurPos = 1;
 
 	while (true) {
-		Common::gotoXY(34, 7);
+		Common::gotoXY(54, 19);
 		Common::setConsoleColor(0, textcolor[0]);
 		cout << "YES";
 
-		Common::gotoXY(48, 7);
+		Common::gotoXY(68, 19);
 		Common::setConsoleColor(0, textcolor[1]);
 		cout << "NO";
 
@@ -113,7 +65,7 @@ void Menu::ExitGame() {
 
 		if (key == '\r') {
 			if (CurPos == 1) {
-				Common::gotoXY(19, 10);
+				Common::gotoXY(19, 30);
 				cout << "THANK YOU FOR PLAYING OUR GAME! HAVE A NICE DAY!" << endl;
 				exit(EXIT_SUCCESS);
 			}
@@ -134,52 +86,13 @@ void Menu::ExitGame() {
 	}
 }
 
-void Menu::drawBorder(int upperleftcornerX, int upperleftcornerY, int width, int Hpercell, int n) {
-	int x = upperleftcornerX;
-	int y = upperleftcornerY;
-
-	for (int i = y; i <= y + Hpercell * n; i++) {
-		if ((i - y) % Hpercell == 0) {
-			if (i == y) {
-				Common::gotoXY(x, i);
-				putchar(218);		//goc trai tren
-				Common::gotoXY(x + width, i);
-				putchar(191);		//goc phai tren
-			}
-			else if (i < y + Hpercell * n) {
-				Common::gotoXY(x, i);
-				putchar(195);		//nga 3 sang trai
-				Common::gotoXY(x + width, i);
-				putchar(180);		//nga 3 sang phai
-			}
-			else {
-				Common::gotoXY(x, i);
-				putchar(192);		//goc trai duoi
-				Common::gotoXY(x + width, i);
-				putchar(217);		//goc phai duoi
-			}
-			Common::gotoXY(x + 1, i);
-			for (int j = x + 1; j < x + width; j++) {
-				putchar(196);		//bien ngang
-			}
-		}
-		else {
-			Common::gotoXY(x, i);
-			putchar(179);			//bien doc
-			Common::gotoXY(x + width, i);
-			putchar(179);
-		}
-
-	}
-}
-
 void Menu::setupMainOption() {
 	int setTextColor[] = { RED,YELLOW,YELLOW,YELLOW,YELLOW };
 	char key;
 	int pos = 1;
 
 	Common::setConsoleColor(BLACK, YELLOW);
-	drawBorder(55, 25, 16, 2, 4);
+	Common::drawBorder(55, 25, 16, 2, 4);
 
 	Common::showCursor(false);
 
@@ -231,7 +144,7 @@ void Menu::setupMainOption() {
 				break;
 			}
 			if (pos == 3) {
-				Leaderboard();
+				Leaderboard::LeaderboardScreen();
 				break;
 			}
 			if (pos == 4) {
@@ -303,6 +216,10 @@ void Menu::endScreen(int score, int time) {
 
 string Menu::inputName() {
 	Common::clearConsole();
+
+	GameTitle();
+
+	Common::gotoXY(50, 20);
 	string s;
 	cout << "YOUR NAME: ";
 	getline(cin, s);

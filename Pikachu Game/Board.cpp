@@ -471,10 +471,14 @@ void Board::printScoreBoard() {
 }
 
 void Board::printButton() {
-	Common::gotoXY(75, 30);
 	Common::setConsoleColor(BLACK, LIGHT_AQUA);
+	// Help button
+	Common::drawBorder(70, 29, 16, 2, 1);
+	Common::gotoXY(75, 30);
 	cout << "H: HELP";
 
+	// Exit button
+	Common::drawBorder(94, 29, 16, 2, 1);
 	Common::gotoXY(98, 30);
 	cout << "ESC: EXIT";
 }

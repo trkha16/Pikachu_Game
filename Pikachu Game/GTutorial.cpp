@@ -1,6 +1,5 @@
 #include "GTutorial.h"
 
-
 //=======TUTORIAL PAGE 1: INTRO==========
 void Tutorial1() {
 	Common::showCursor(false);
@@ -586,9 +585,6 @@ void Tutorial3() {
 			break;
 		}
 	}
-
-	/*Common::gotoXY(2, 19);
-	cout << endl;*/
 }
 
 //=======TUTORIAL PAGE 4: SCORES AND OUTRO========
@@ -651,7 +647,4 @@ void Tutorial4() {
 			break;
 		}
 	}
-
-	//Common::gotoXY(2, 19);
-	//cout << endl;
 }
