@@ -37,6 +37,8 @@ void Game::startGame() {
 		{
 		case 1: // ESC
 			Common::clearConsole();
+			_isLoop = false;
+			Common::setConsoleColor(BLACK, WHITE);
 			Menu::mainMenu();
 			break;
 		case 2:
@@ -63,22 +65,6 @@ void Game::startGame() {
 			break;
 		}
 	}
-}
-
-void Game::setX(int x) {
-	_x = x;
-}
-
-void Game::setY(int y) {
-	_y = y;
-}
-
-int Game::getX() {
-	return _x;
-}
-
-int Game::getY() {
-	return _y;
 }
 
 void Game::moveUp() {

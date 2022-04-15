@@ -172,7 +172,6 @@ void Menu::setupMainOption() {
 void Menu::mainMenu() {
 	Common::showCursor(false);
 	Common::clearConsole();
-	Common::setConsoleColor(BLACK, BLACK);
 
 	GameTitle();
 	setupMainOption();
@@ -209,11 +208,10 @@ void Menu::endScreen(int score, int time) {
 	while (true) {
 		int ch = Common::getConsoleInput();
 		if (ch == 6) {
+			Menu::mainMenu();
 			break;
 		}
 	}
-	Game g;
-	g.startGame();
 }
 
 string Menu::inputName() {

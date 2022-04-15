@@ -8,7 +8,7 @@ void Leaderboard::LeaderboardScreen() {
 	BackButton();
 	while (true) {
 		int key = Common::getConsoleInput();
-		if (key == 1) {
+		if (key == 1) { // ESC
 			Menu::mainMenu();
 			break;
 		}
