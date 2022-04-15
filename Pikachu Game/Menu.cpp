@@ -171,6 +171,8 @@ void Menu::setupMainOption() {
 
 void Menu::mainMenu() {
 	Common::showCursor(false);
+	Common::clearConsole();
+	Common::setConsoleColor(BLACK, BLACK);
 
 	GameTitle();
 	setupMainOption();

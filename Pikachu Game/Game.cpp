@@ -37,8 +37,8 @@ void Game::startGame() {
 		{
 		case 1: // ESC
 			Common::clearConsole();
-			Common::setConsoleColor(WHITE, BLACK);
-			return;
+			Menu::mainMenu();
+			break;
 		case 2:
 			moveUp();
 			break;
