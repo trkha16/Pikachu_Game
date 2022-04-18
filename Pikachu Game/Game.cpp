@@ -70,6 +70,7 @@ void Game::startGame() {
 void Game::moveUp() {
 	int posY = _y - _b->getCellRow() + 1;
 	if (posY >= 3) {
+		Common::playSound(2);
 		if (_b->isCharacterLocked(_b->getIByYConsole(_y), _b->getJByXConsole(_x)) == true) {
 			_b->cellColor(_x, _y, BLUE, WHITE);
 		}
@@ -94,6 +95,7 @@ void Game::moveUp() {
 void Game::moveDown() {
 	int posY = _y + _b->getCellRow() - 1;
 	if (posY <= 3 + (_b->getSize() - 1) * (_b->getCellRow() - 1)) {
+		Common::playSound(2);
 		if (_b->isCharacterLocked(_b->getIByYConsole(_y), _b->getJByXConsole(_x)) == true) {
 			_b->cellColor(_x, _y, BLUE, WHITE);
 		}
@@ -117,6 +119,7 @@ void Game::moveDown() {
 void Game::moveLeft() {
 	int posX = _x - _b->getCellCol() + 1;
 	if (posX >= 5) {
+		Common::playSound(2);
 		if (_b->isCharacterLocked(_b->getIByYConsole(_y), _b->getJByXConsole(_x)) == true) {
 			_b->cellColor(_x, _y, BLUE, WHITE);
 		}
@@ -140,6 +143,7 @@ void Game::moveLeft() {
 void Game::moveRight() {
 	int posX = _x + _b->getCellCol() - 1;
 	if (posX <= 5 + (_b->getSize() - 1) * (_b->getCellCol() - 1)) {
+		Common::playSound(2);
 		if (_b->isCharacterLocked(_b->getIByYConsole(_y), _b->getJByXConsole(_x)) == true) {
 			_b->cellColor(_x, _y, BLUE, WHITE);
 		}
@@ -346,6 +350,7 @@ void Game::solveMatching() {
 
 		// ô 1 và ô 2 match với nhau
 		if (checkMatching(firstBlock, secondBlock) == true) {
+			Common::playSound(3);
 			_score += 100; // Cộng 100 điểm khi match thành công
 
 			_cntCellMatch += 2; //  Đã xóa được thêm 2 ô
@@ -375,7 +380,7 @@ void Game::solveMatching() {
 			// Tô lại màu cho ô 2
 			Common::gotoXY(_b->getXInConsole(jB), _b->getYInConsole(iB));
 			_b->cellColor(_b->getXInConsole(jB), _b->getYInConsole(iB), WHITE, WHITE);
-		
+
 			string s = to_string(_score);
 			while (s.size() < 5) {
 				s = '0' + s;
@@ -385,6 +390,8 @@ void Game::solveMatching() {
 			cout << s;
 		}
 		else { // Nếu 2 ô không match với nhau
+			Common::playSound(4);
+
 			// Màu đỏ báo 2 ô không match được
 			// Tô lại màu cho ô 1
 			Common::gotoXY(_b->getXInConsole(jA), _b->getYInConsole(iA));

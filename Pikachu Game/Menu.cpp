@@ -125,29 +125,35 @@ void Menu::setupMainOption() {
 			if (pos > 1)
 				pos--;
 			else pos = 4;
+			Common::playSound(2);
 		}// UP ARROW
 		if ((key == 80 || tolower(key) == 's') && (pos >= 1 && pos <= 4)) {
 			if (pos < 4)
 				pos++;
 			else pos = 1;
+			Common::playSound(2);
 		}// DOWN ARROW
 		if (key == '\r') {
 
 			if (pos == 1) {
+				Common::playSound(3);
 				Game g;
 				g.startGame();
 				break;
 			}
 			if (pos == 2) {
+				Common::playSound(3);
 				system("cls");
 				Tutorial();
 				break;
 			}
 			if (pos == 3) {
+				Common::playSound(3);
 				Leaderboard::LeaderboardScreen();
 				break;
 			}
 			if (pos == 4) {
+				Common::playSound(3);
 				ExitGame();
 				break;
 			}
@@ -179,6 +185,9 @@ void Menu::mainMenu() {
 
 void Menu::endScreen(int score, int time) {
 	Common::clearConsole();
+
+	Common::playSound(6);
+
 	// In chữ victory
 	{
 		Common::setConsoleColor(BLACK, LIGHT_GREEN);
