@@ -8,7 +8,7 @@ int main() {
 	Common::setUpConsole();
 	Menu* p;
 	p->mainMenu();
-
 	Common::setConsoleColor(BLACK, WHITE);
+
 	return 0;
 }

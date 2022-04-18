@@ -210,17 +210,30 @@ void Menu::endScreen(int score, int time) {
 		Common::gotoXY(25, 18);
 		cout << "     `-'      `--'     `-----'   `--'        `-----' `--' '--'   `--'      ";
 	} // In chữ victory
-	Common::gotoXY(50, 30);
+
+	Common::drawBorder(35, 21, 18, 4, 1);
+	Common::gotoXY(39, 23);
 	cout << "SCORE: " << score;
-	Common::gotoXY(50, 31);
+
+	Common::drawBorder(70, 21, 18, 4, 1);
+	Common::gotoXY(75, 23);
 	cout << "TIME: " << time;
+
+	Sleep(8000);
+
+	Menu::mainMenu();
+
+	/*Common::drawBorder(55, 30, 12, 2, 1);
+	Common::gotoXY(59, 31);
+	cout << "ENTER";
+
 	while (true) {
 		int ch = Common::getConsoleInput();
 		if (ch == 6) {
 			Menu::mainMenu();
 			break;
 		}
-	}
+	}*/
 }
 
 string Menu::inputName() {

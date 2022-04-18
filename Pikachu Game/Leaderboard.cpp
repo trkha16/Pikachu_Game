@@ -9,6 +9,7 @@ void Leaderboard::LeaderboardScreen() {
 	while (true) {
 		int key = Common::getConsoleInput();
 		if (key == 1) { // ESC
+			Common::playSound(3);
 			Menu::mainMenu();
 			break;
 		}
@@ -55,9 +56,10 @@ void Leaderboard::DrawBoardLeaderboard() {
 }
 
 void Leaderboard::BackButton() {
-	Common::drawBorder(2, 1, 12, 2, 1);
+	Common::drawBorder(2, 1, 4, 2, 1);
 	Common::gotoXY(4, 2);
-	cout << "ESC: BACK";
+	putchar(60);
+	//cout << "ESC: BACK";
 }
 
 void Leaderboard::PrintInfoPlayer() {
