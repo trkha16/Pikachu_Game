@@ -3,6 +3,7 @@
 #include <Windows.h>
 #include "Common.h"
 #include <vector>
+#include <fstream>
 using namespace std;
 
 struct Board {
@@ -11,6 +12,7 @@ struct Board {
 	bool** _LOCK; // Kiểm tra xem phần tử ở mảng A đã lock hay chưa
 	int _cellRow; // ĐỘ CAO 1 Ô
 	int _cellCol; // ĐỘ DÀI 1 Ô
+	char** _background; // Mảng chứa background của hình
 
 	Board(int); // Constructor khởi tạo Board
 	~Board(); // Destructor 
@@ -32,6 +34,8 @@ struct Board {
 	bool isCharacterLocked(int, int); // Kiểm tra xem ô này đã bị lock hay chưa
 	void setCharacterLocked(int, int); // Gán giá trị cho _Lock[i][j]
 	void deleteCellInConsoleWhenMatched(int, int); // Xóa ô trên console khi match
+	void showBackgroundConsoleWhenMatched(int, int); // Hiện background khi xóa cell
 	void printScoreBoard(); // Hiển thị bảng điểm và chi tiết game
 	void printButton(); // Hiển thị các nút thao tác game
+	void getBackground(); // Lấy background từ txt
 };

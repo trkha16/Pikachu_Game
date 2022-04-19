@@ -75,7 +75,7 @@ void Game::moveUp() {
 			_b->cellColor(_x, _y, BLUE, WHITE);
 		}
 		else if (_b->getCharacterByIJ(_b->getIByYConsole(_y), _b->getJByXConsole(_x)) == '0') {
-			_b->cellColor(_x, _y, BLACK, BLACK);
+			_b->showBackgroundConsoleWhenMatched(_b->getIByYConsole(_y), _b->getJByXConsole(_x));
 		}
 		else {
 			_b->cellColor(_x, _y, BLACK, WHITE);
@@ -100,7 +100,7 @@ void Game::moveDown() {
 			_b->cellColor(_x, _y, BLUE, WHITE);
 		}
 		else if (_b->getCharacterByIJ(_b->getIByYConsole(_y), _b->getJByXConsole(_x)) == '0') {
-			_b->cellColor(_x, _y, BLACK, BLACK);
+			_b->showBackgroundConsoleWhenMatched(_b->getIByYConsole(_y), _b->getJByXConsole(_x));
 		}
 		else {
 			_b->cellColor(_x, _y, BLACK, WHITE);
@@ -124,7 +124,7 @@ void Game::moveLeft() {
 			_b->cellColor(_x, _y, BLUE, WHITE);
 		}
 		else if (_b->getCharacterByIJ(_b->getIByYConsole(_y), _b->getJByXConsole(_x)) == '0') {
-			_b->cellColor(_x, _y, BLACK, BLACK);
+			_b->showBackgroundConsoleWhenMatched(_b->getIByYConsole(_y), _b->getJByXConsole(_x));
 		}
 		else {
 			_b->cellColor(_x, _y, BLACK, WHITE);
@@ -148,7 +148,7 @@ void Game::moveRight() {
 			_b->cellColor(_x, _y, BLUE, WHITE);
 		}
 		else if (_b->getCharacterByIJ(_b->getIByYConsole(_y), _b->getJByXConsole(_x)) == '0') {
-			_b->cellColor(_x, _y, BLACK, BLACK);
+			_b->showBackgroundConsoleWhenMatched(_b->getIByYConsole(_y), _b->getJByXConsole(_x));
 		}
 		else {
 			_b->cellColor(_x, _y, BLACK, WHITE);
@@ -376,10 +376,14 @@ void Game::solveMatching() {
 			// Tô lại màu cho ô 1
 			Common::gotoXY(_b->getXInConsole(jA), _b->getYInConsole(iA));
 			_b->cellColor(_b->getXInConsole(jA), _b->getYInConsole(iA), BLACK, BLACK);
+			
+			_b->showBackgroundConsoleWhenMatched(firstBlock.first, firstBlock.second);
+			_b->showBackgroundConsoleWhenMatched(secondBlock.first, secondBlock.second);
 
 			// Tô lại màu cho ô 2
 			Common::gotoXY(_b->getXInConsole(jB), _b->getYInConsole(iB));
 			_b->cellColor(_b->getXInConsole(jB), _b->getYInConsole(iB), WHITE, WHITE);
+
 
 			string s = to_string(_score);
 			while (s.size() < 5) {

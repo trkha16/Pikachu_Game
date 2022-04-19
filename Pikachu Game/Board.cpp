@@ -4,6 +4,7 @@ Board::Board(int size) {
 	_size = size; // Khởi tạo size
 	_cellRow = 5;
 	_cellCol = 9;
+
 	// Khởi tạo mảng characters
 	_A = new char* [_size + 2];
 	_LOCK = new bool* [_size + 2];
@@ -18,6 +19,14 @@ Board::Board(int size) {
 			_LOCK[i][j] = false;
 		}
 	}
+
+	// Khởi tạo mảng background
+	_background = new char* [27];
+	for (int i = 1; i <= 26; i++) {
+		_background[i] = new char[53];
+	}
+
+	getBackground();
 }
 
 Board::~Board()
@@ -481,4 +490,115 @@ void Board::printButton() {
 	Common::drawBorder(94, 29, 16, 2, 1);
 	Common::gotoXY(98, 30);
 	cout << "ESC: EXIT";
+}
+
+void Board::getBackground() {
+	fstream fs;
+	fs.open("background.txt");
+
+	int size = 0;
+	string s;
+
+	while (!fs.eof()) {
+		size++;
+		s = "";
+		getline(fs, s);
+		while (s.size() <= 48) {
+			s += ' ';
+		}
+		for (int i = 0; i < s.size(); i++) {
+			_background[size][i + 1] = s[i];
+		}
+	}
+
+	while (size <= 23) {
+		size++;
+		s = "";
+		while (s.size() <= 48) {
+			s += ' ';
+		}
+		for (int i = 0; i < s.size(); i++) {
+			_background[size][i + 1] = s[i];
+		}
+	}
+
+	fs.close();
+}
+
+void Board::showBackgroundConsoleWhenMatched(int i, int j) {
+	int x = getXInConsole(j);
+	int y = getYInConsole(i);
+
+
+	// Biên trên
+	if (_A[i - 1][j] == '0') {
+		for (int h = x - 3; h <= x + 3; h++) {
+			Common::gotoXY(h, y - 2);
+			Common::setConsoleColor(BLACK, WHITE);
+			cout << _background[y - 2][h];
+		}
+	}
+
+	// Biên dưới
+	if (_A[i + 1][j] == '0') {
+		for (int h = x - 3; h <= x + 3; h++) {
+			Common::gotoXY(h, y + 2);
+			Common::setConsoleColor(BLACK, WHITE);
+			cout << _background[y + 2][h];
+		}
+	}
+
+	// Biên trái
+	if (_A[i][j - 1] == '0') {
+		for (int h = y - 1; h <= y + 1; h++) {
+			Common::gotoXY(x - 4, h);
+			Common::setConsoleColor(BLACK, WHITE);
+			cout << _background[h][x - 4];
+		}
+	}
+
+	// Biên phải
+	if (_A[i][j + 1] == '0') {
+		for (int h = y - 1; h <= y + 1; h++) {
+			Common::gotoXY(x + 4, h);
+			Common::setConsoleColor(BLACK, WHITE);
+			cout << _background[h][x + 4];
+		}
+	}
+
+	// góc trái trên
+	if (_A[i - 1][j] == '0' && _A[i - 1][j - 1] == '0' && _A[i][j - 1] == '0') {
+		Common::setConsoleColor(BLACK, WHITE);
+		Common::gotoXY(x - 4, y - 2);
+		cout << _background[y - 2][x - 4];
+	}
+
+	// góc phải trên
+	if (_A[i - 1][j] == '0' && _A[i - 1][j + 1] == '0' && _A[i][j + 1] == '0') {
+		Common::setConsoleColor(BLACK, WHITE);
+		Common::gotoXY(x + 4, y - 2);
+		cout << _background[y - 2][x + 4];
+	}
+
+	// góc trái dưới
+	if (_A[i + 1][j] == '0' && _A[i + 1][j - 1] == '0' && _A[i][j - 1] == '0') {
+		Common::setConsoleColor(BLACK, WHITE);
+		Common::gotoXY(x - 4, y + 2);
+		cout << _background[y + 2][x - 4];
+	}
+
+	// góc phải dưới
+	if (_A[i + 1][j] == '0' && _A[i + 1][j + 1] == '0' && _A[i][j + 1] == '0') {
+		Common::setConsoleColor(BLACK, WHITE);
+		Common::gotoXY(x + 4, y + 2);
+		cout << _background[y + 2][x + 4];
+	}
+
+	for (int h = y - 1; h <= y + 1; h++) {
+		for (int k = x - 3; k <= x + 3; k++) {
+			Common::gotoXY(k, h);
+			Common::setConsoleColor(BLACK, WHITE);
+			cout << _background[h][k];
+		}
+	}
 }
