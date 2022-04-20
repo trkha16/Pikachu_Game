@@ -1,37 +1,10 @@
-Tran Binh Kha/1800/58
-Tran Binh Kha/1800/61
-Tran Binh Kha/1800/56
-Tran Binh Kha/300/51
-Tran Binh Kha/400/49
-Khaaa/1700/82
-BKhaa/1700/52
-TrKha/1750/65
-/1800/41
-Khaaa/1800/61
-khaaa/850/52
-/1800/82
-/1800/67
-/1800/64
-Khaa/900/69
-Khaaaa/1800/62
-/600/23
-Khaa/1800/71
-Tran Binh/650/50
-/1800/58
-/650/51
-/1800/87
-Khaasd/1800/42
-Khaaaaa/1800/45
-Khasd/1800/42
-has/1800/41
-khsd/1800/52
-khaaaa/1800/58
-Khsadh/1750/87
-/1750/85
-/900/51
-Khaa/900/74
-/1800/123
-/1800/83
-/200/17
-/1800/60
-/1700/114
+Kha/700/32
+TrKha/1800/42
+BKha/950/38
+Khaa/1750/55
+Tran Binh Kha/1800/78
+Kha/450/53
+Khaaa/1800/30
+Khaaaaa/1800/46
+Binh Kha/1800/54
+Kha/1700/67

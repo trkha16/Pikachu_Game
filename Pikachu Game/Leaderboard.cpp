@@ -112,6 +112,6 @@ void Leaderboard::PrintInfoPlayer() {
 		fs.close();
 	}
 	else {
-		cout << "Error opening file";
+		//cout << "Error opening file";
 	}
 }
