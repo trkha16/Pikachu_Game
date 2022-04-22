@@ -1,9 +1,14 @@
-#include <iostream>
-#include <windows.h>
-using namespace std;
+#include "Board.h"
+#include "Common.h"
+#include "Game.h"
+#include "Menu.h"
 
 int main() {
-	cout << "hello Kha";
-	Sleep(10000);
+	srand(time(0));
+	Common::setUpConsole();
+	Menu* p;
+	p->mainMenu();
+	Common::setConsoleColor(BLACK, WHITE);
+
 	return 0;
 }
